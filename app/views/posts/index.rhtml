@@ -1,0 +1,88 @@
+<% content_for :sidebar do %>
+<div class="search" style="display:none;"> 
+	<form action="/search" method="get"> 
+		<input id="term" name="term" type="text" />&nbsp;<input type="submit" value="Search" /> 
+	</form> 
+</div>
+
+<div id="sidebar_top">
+	<div class="button_to_add_new">
+		<ul>
+			<li>
+				<%= link_to_function "Write something" do |page|
+							page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
+				 		end %>
+			</li>
+			<li>
+				<%= link_to_function "Upload something to share" do |page|
+							page.visual_effect	:toggle_slide, :form_upload_file, :duration => 0.3
+					 	end %>
+			</li>
+			<li style="display:none;">
+				<%= link_to_function "Alert on an event" do |page|
+							page.visual_effect	:toggle_slide, :form_new_event, :duration => 0.3
+						end %>
+			</li>
+		</ul>
+	</div>
+</div>
+<% end %>
+
+<div id="page_top">
+  <div id="page_top_content" class="page_top_content"> 
+    <div class="page_top">
+        <div class="page_header" id="page_header"> 
+          <div id="widget_bar"> 
+						<div class="widget_bar"> 
+  						<div class="widget_bar_links tags_hidden"> 
+				        <span class="sharing_link"> 
+				          <% unless @posts.empty? then %>
+				            <i>Dernier post : <%= @posts.first.created_at.strftime("%d/%m à %Hh:%Mm")%></i>
+				          <% end %>
+				        </span> 
+    
+					      <b>
+									Do what you want : Ask for a question, post a talk, share docs, alert on an event. 
+									Actually, you have the power to make this page what you want!
+								</b>
+  						</div> 
+						</div> 
+					</div>
+    		</div> 
+  		</div> 
+		</div>
+
+		<div id="page_2105674" class="page content">
+			<div class="inner">
+				<% if @posts.size.zero? %>
+				<h1>Please, fill me ! 
+					<span style="font-size:12pt;">Look at your right, there are links to start </span>
+					<span id="post_nb" style="display:none;"></span></h1>
+				<% else %>
+				<h1>There are currently <span id="post_nb"><%= @posts.size %></span> posts</h1>
+				<% end %>
+				
+				<p class="legend yellow">
+					Please people, help this page to stay accurate and useful for everybody. Sort posts just by drag&drop to the position you think good for it.
+					If only a few people sort, users sort will fail, whereas if everybody participates, users sort will become very interesting and <i>trustful</i>!
+				</p>
+				
+				<div id="form_new_post" class="standard_form" style="display:none;">
+					<%= render :partial => "posts/form" %>
+				</div>
+				
+				<div id="form_upload_file" class="standard_form" style="background-color:#fffccc;display:none;">
+					<%= render :partial => "posts/upload_file" %>
+				</div>
+				
+				<ol id="posts_list">
+					<%= render :partial => "posts/post", :collection => @posts %>
+				</ol>
+				
+				<%= sortable_element "posts_list", :url => {:action => :sort_posts}, :scroll => true %>
+				
+			</div>
+		</div>
+
+  </div> 
+</div>

@@ -1,0 +1,52 @@
+<% if post.assets.size > 0 then %>
+<% classes = "post yellow"%>
+<% elsif (post_counter % 2).zero? then %>
+<% classes = "post" %>
+<% else %>
+<% classes = "post green" %>
+<% end %>
+
+<li id="<%= dom_id(post) %>" class="<%= classes %>">
+	<table>
+		<tbody>
+			<tr>
+				<td><b>Author</b></td>
+				<td>
+					<b>
+						<a href="mailto:<%= post.email %>"><%= post.email %></a> à <%= post.created_at.strftime("%Hh:%Mm")%>
+					</b>
+				</td>
+			</tr>
+			
+			<% unless post.assets.size.zero? then %>
+			<tr>
+				<td><b style="color:red;">Files</b></td>
+				<td>
+					<% post.assets.each do |asset| %>
+						<a href="/assets/<%= asset.filename %>"><%= asset.filename %></a>,
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+			
+			<tr>
+				<td style="padding-right:10px;">Message</td>
+				<td>
+					<%= post.content%>
+					<br/>
+					<%= link_to_remote 	"Add a comment (#{post.comments.count})",
+					 										:url => {:action => :show_comments, :post => post.id, :controller => :posts} %> or
+					
+					<span class="delete_link">
+					<%= link_to_remote 	"Delete this message",
+					 										:url => {:action => :destroy, :post => post.id, :controller => :posts},
+															:loading => "new Effect.Appear('post_#{post.id}_gif')",
+															:confirm => "Are you sure you want to delete definitively this message and all the comments associated with ?" %>
+					</span>
+
+					<%= image_tag '/images/indicator.gif', :id => "post_#{post.id}_gif", :style => "display:none;" %>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</li>

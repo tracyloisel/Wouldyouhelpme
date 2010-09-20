@@ -1,0 +1,36 @@
+<% form_for	Asset.new,
+						:url => {:action => :upload, :controller => :assets},
+						:html => { :multipart => true, :target => 'upload_frame'} do |form| %>
+
+<h1>Upload a file</h1>
+
+<p>
+	<label for="">Your e-mail</label>
+	<%= text_field "post", "email", :class => :text, :style => "width:500px;" %>
+</p>
+
+<p>
+	<label for="">Leave a description about your file</label>
+	<%= text_area "post", "content", :class => :text, :style => "width:500px;height:100px;" %>
+</p>
+
+<p>
+	<i>Choose your file :</i><br/>
+	<label>
+		<%= form.file_field "uploaded_data"	%>
+	</label>
+</p>
+<p class="note"><i>Max size is fixed to 1Go</i></p>
+
+<p class="p_for_submit">
+	<%= submit_tag "Upload my file", :onclick => "new Effect.Appear('upload_gif', {duration: 0.2});" %> or
+
+	<%= link_to_function "Slide Up this form" do |page|
+				page.visual_effect	:toggle_slide, :form_upload_file, :duration => 0.3
+			end %>
+
+	<%= image_tag '/images/indicator.gif', :style => "display:none;", :id => "upload_gif" %>
+</p>
+
+<iframe id="upload_frame" name="upload_frame" style="width:0px;height:0px;border:0px;" src="about:blank;"></iframe>
+<% end %>

@@ -19,5 +19,5 @@ production:
   adapter: mysql
   database: wouldyouhelpme
   username: europeanuser
-  password: iloveputeaux
+  password: il0veputeaux
   host: 91.121.185.22

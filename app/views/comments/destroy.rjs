@@ -1,0 +1,1 @@
+page.visual_effect  :DropOut, "comment_#{@comment.id}"

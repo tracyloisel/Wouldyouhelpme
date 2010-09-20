@@ -1,0 +1,6 @@
+page.visual_effect  :Fade, :upload_gif
+page.insert_html  :top, :posts_list, :partial => "posts/post", :object => @post, :locals => {:post_counter => 1}
+page.replace_html :post_nb, :inline => "<%= Post.count %>"
+page.visual_effect  :Shake, "post_#{@post.id}"
+page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => true
+page.visual_effect  :SlideUp, :form_upload_file

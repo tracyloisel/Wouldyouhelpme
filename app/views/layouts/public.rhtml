@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>Would You Help Me ?</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="Description" content="site de partage d'expérience et de documents de tous ce que peuvent vouloir ses utilisateurs.">
+		<meta name="Keywords" content="europe-ecologie,green parties, would you help me, crazy experiences">
+
+		<%= stylesheet_link_tag 'public' %>
+		<%= javascript_include_tag :defaults %>
+	</head>
+	
+	<body>
+		<div id="header">
+			<div id="webapp_title">
+				<h1>
+					<%= link_to_function "Would You Help Me ?" do |page|
+								page.visual_effect	:Shake, :webapp_title
+							end %>
+					<span style="font-size:10pt;font-weight:normal">
+						Share experiences, ask for help and participate to the green community !
+					</span> 
+				</h1>
+			</div>
+			
+			<div id="account_links">
+				<a href="http://www.ekologeek.org/">Logout</a>
+			</div>
+			
+			<div class="clear"></div>
+		</div>
+		
+		<div id="feeds">
+			<%= yield %>
+		</div>
+	</body>
+</html>

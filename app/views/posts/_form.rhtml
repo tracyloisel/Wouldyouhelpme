@@ -1,0 +1,38 @@
+<% remote_form_for 	Post.new,
+										:url => {:action => :create},
+										:loading => "new Effect.Appear('post_gif')" do |form| %>
+
+	<h1>Write something</h1>
+	
+	<table><tbody>
+	<tr>
+		<td><%= form.label :email, "Your email" %></td>
+		<td><%= form.text_field	:email, :class => :text, :style => "width:500px" %></td>
+	</tr>
+
+	<tr>
+		<td><%= form.label :content, "You say" %></td>
+		<td>
+			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:100px;" %>
+			<p class="note">If you write elegantly, people will answer you more quickly</p>
+		</td>
+	</tr>
+	
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :mail_me_comments %> Please send me by email all new comments
+		</label></td>
+	</tr>
+	</tbody></table>
+	
+	<br/>
+	
+	<p class="p_for_submit">
+		<%= submit_tag "Publish now!" %> or
+		<%= link_to_function "Slide up this form" do |page|
+					page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
+				end %>
+		<%= image_tag '/images/indicator.gif', :id => 'post_gif', :style => "display:none;" %>
+	</p>
+<% end %>

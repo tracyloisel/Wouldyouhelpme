@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+ 
+<head> 
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" /> 
+  <title>Would You Help Me?</title> 
+
+ 	<%= javascript_include_tag :defaults %>
+
+  <link href="http://asset3.backpackit.com/stylesheets/cache/all.css?1284151692" 
+				media="screen" rel="stylesheet" type="text/css" />
+				
+  <link href="http://asset3.backpackit.com/stylesheets/print/application.css?1284151692"
+				media="print" rel="stylesheet" type="text/css" />
+	
+	<%= stylesheet_link_tag "public" %>
+	<%= stylesheet_link_tag "all" %>	
+
+  <!--[if IE]><link href="http://asset0.backpackit.com/stylesheets/ie/application.css?1284151692" media="screen" rel="stylesheet" type="text/css" /><![endif]--> 
+  
+  <style type="text/css" title="Color scheme"> 
+    a:link, a:visited,
+    div.widget a.existing_comments_icon {
+      color: #007dde;
+    }
+ 
+    div.global_header {
+      background: #2e8c09;
+    }
+ 
+    div.tab_container a:link,
+    div.tab_container a:visited,
+    div.tab_container ul li a.current:hover {
+      color: #c6ffca;
+    }
+ 
+    div#Sidebar div#Pages div.pagesnav a:link,
+    div#Sidebar div#Pages div.pagesnav a:visited {
+      color: #2e8c09;
+    }
+ 
+    div.widget_bar a:link,
+    div.widget_bar a:visited,
+    table.messages th.post_a_new_message a {
+      color: #007dde;
+    }
+  </style> 
+ 
+  <script type="text/javascript"> 
+//<![CDATA[
+function async(f) { async.f.push(f) }; async.f = []
+//]]>
+</script> 
+  
+</head> 
+ 
+<body class="page empty" id="body"> 
+ 
+<noscript> 
+  <div class="javascript_disabled_notification"> 
+    <div class="inner"> 
+      <h1>You need to change a setting in your web browser</h1> 
+      <p>Would You Help Me? requires a browser feature called <strong>JavaScript</strong>. 
+					All modern browsers support JavaScript. You probably just need to change a setting in 
+					order to turn it on.
+			</p> 
+ 
+      <p>Please see: 
+				<a href="http://www.google.com/support/bin/answer.py?answer=23852">
+				How to enable JavaScript in your browser</a>.
+			</p> 
+ 
+      <p>If you use ad-blocking software, it may require you to allow JavaScript from backpackit.com.</p> 
+ 
+      <p>Once you've enabled JavaScript you can <a href="">try loading this page again</a>.</p> 
+ 
+      <p>Thank you.</p> 
+    </div> 
+  </div> 
+</noscript> 
+ 
+<div class="global_header"> 
+  <div class="tab_container"> 
+		<div id="title">WouldYouHelp.Me?</div>
+	
+    <ul class="tabs"> 
+    	<li><a href="#">Welcome</a></li> 
+
+  		<li><a href="/posts" class="current">Feeds</a></li>
+		</ul> 
+
+	  <ul id="account_links">       
+			<a href="/account/logout">Logout</a>
+	  </ul>
+  </div> 
+</div> 
+ 
+ 
+<div id="Wrapper"> 
+  <div class="fix_width"> 
+ 
+<div id="Container"> 
+  <table id="container_content"><tr><td class="container_content_column" id="main_column"> 
+    <div id="Main"> 
+      <div class="inner"> 
+				<%= yield %>
+  </td>
+	<td class="container_content_column" id="sidebar_column"> 
+    <div id="Sidebar"> 
+      <div id="Pages">
+				<%= yield :sidebar %>
+			</div>
+
+		  <div class="SidebarAd"> 
+			  <h2 style="color:red;">What you can do</h2>
+				<p>
+					1. You can write posts
+				</p>
+				<p>
+					2. You can sort posts by drag&drop
+				</p>
+				<p>
+					3. You can comment posts
+				</p>
+				<p>
+					4. You can upload files to share
+				</p>
+		  </div>
+		
+		  <div class="SidebarAd"> 
+			  <h2 style="color:red;">Next functions to add</h2>
+				<p>
+					1. Authentification with recaptcha code
+				</p>
+				<p>
+					2. Email functions
+				</p>
+				<p>
+					3. Add an event
+				</p>
+				<p>
+					4. List of all files
+				</p>
+				<p>
+					5. Archive posts instead of delete
+				</p>
+				<p>
+					6. Add an Office-like editor Tiny-MCE
+				</p>
+				<p>
+					7. Sort comments
+				</p>
+		  </div>
+  
+    </div> 
+  </div> 
+</td></tr></table> 
+ 
+  <div id="BottomShadow"> 
+    <div class="inner"> 
+		</div>
+		&nbsp;
+ 	</div>
+	</div> 
+	
+	<div id="Footer"> 
+	  <p>
+			Experimental project for the brussels workshop 17/09/2010 - 
+			<a href="http://www.facebook.com/tracyloisel" target="_blank">Tracy LOISEL (FRANCE)</a>, <b>EcoloGeek</b> and <b>Europe-Ecologie</b>
+		</p>
+	</div>
+</div> 
+
+<div id="comments_box" style="display:none;">
+</div>
+
+</body> 
+</html>

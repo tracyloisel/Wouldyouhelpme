@@ -1,0 +1,27 @@
+<% remote_form_for 	@post.comments.new,
+										:url => {:action => :create, :controller => :comments, :post => @post.id},
+										:loading => "new Effect.Appear('comment_gif')" do |form| %>
+		<h3>Add a new comment</h3>
+		
+		<table><tbody>
+		<tr>
+			<td><%= form.label :email, "Your email" %></td>
+			<td><%= form.text_field :email, :class => :text, :style => "width:400px;" %></td>
+		</tr>
+		
+		<tr>
+			<td><%= form.label :content, "Your opinion" %></td>
+			<td><%= form.text_area :content, :class => :text, :style => "height:100px;width:400px;" %></td>
+		</tr>
+		
+		<tr><td></td><td>
+			<p class="p_for_submit">
+			<%= submit_tag "Save it"%> or
+			<%= link_to_function "Slide Up this form" do |page|
+						page.visual_effect	:toggle_slide, :form_new_comment, :duration => 0.3
+					end %>
+			<%= image_tag '/images/indicator.gif', :id => "comment_gif", :style => "display:none;"%>
+			</p>
+		</td></tr>
+		</tbody></table>
+<% end%>

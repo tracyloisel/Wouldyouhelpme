@@ -1,0 +1,4 @@
+page.insert_html  :top, :comments_list, :partial => "comments/comment", :object => @comment
+page.visual_effect  :SlideUp, :form_new_comment
+page.visual_effect  :Fade, :comment_gif
+page.visual_effect  :Shake, "comment_#{@comment.id}"
