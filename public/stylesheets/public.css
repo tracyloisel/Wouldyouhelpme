@@ -1,0 +1,225 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* CSS RESET */
+table {
+border-collapse: collapse;
+border-spacing: 2;
+}
+
+img {-ms-interpolation-mode: bicubic;}
+
+caption, th, td {
+text-align: left;
+font-weight: normal;
+vertical-align:top;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+content: "";
+}
+
+blockquote, q {
+quotes: "" "";
+}
+
+a {cursor: pointer;}
+
+/* END CSS RESET */
+.clear{clear:both;}
+
+#header{
+	width:100%;
+	background-color:green;
+	color:#fff;
+	font-size:12pt;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+#title{
+	color: white;
+	float: left;
+	font-size: 16pt;
+	font-weight: bold;
+}
+
+#create_post{
+	margin-bottom:10px;
+	border:2px blue solid;
+	text-align:center;	
+}
+#create_post h1{
+	background-color:#eaf2f5;
+	color:#000;
+	font-size:20pt;
+	font-weight:bold;
+	line-height:50px;
+}
+#create_post a{text-decoration:none;color:blue;}
+#form_new_post{margin-bottom:10px;}
+
+#feeds_list{
+	border:5px #DCF6DD solid;
+	background-color:#fff;
+}
+
+.green{background-color:#DCF6DD;}
+.yellow{background-color:#fffccc}
+
+.post{
+	padding:5px;
+	border-bottom:1px #333 dashed;
+	line-height:20px;
+}
+
+#comments_box{
+	font-size:12pt;
+	color:#fff;
+	background:none repeat scroll 0 0 #000;
+  height:550px;
+  left:26%;
+  opacity:0.90;
+  filter: alpha(opacity=90);
+  padding:8px;
+  position:fixed;
+  top:10%;
+  width:600px;
+	text-align: left;
+  -moz-border-radius-bottomleft:5px;
+  -moz-border-radius-bottomright:5px;
+  -moz-border-radius-topleft:5px;
+  -moz-border-radius-topright:5px;
+  border-bottom-left-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
+  -webkit-border-radius: 5px;
+	overflow:scroll;
+}
+
+.legend{font-size:8pt;color:#000;padding:5px;}
+
+#comments_box h1{border-bottom:1px #ddd solid;text-align:center;font-size:16pt;}
+
+#form_new_comment{
+	background-color:#EDF3FE;
+	color:#000;
+	width:500px;
+	padding:10px;
+	margin-bottom:10px;
+	-moz-border-radius-bottomleft:5px;
+  -moz-border-radius-bottomright:5px;
+  -moz-border-radius-topleft:5px;
+  -moz-border-radius-topright:5px;
+  border-bottom-left-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
+  -webkit-border-radius: 5px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.comment{
+	padding-bottom:5px;
+	border-bottom:1px #ddd dashed;
+}
+
+.delete_link {font-size:8pt;color:red;}
+a.delete_link {color:red;}
+.delete_link a:hover{background-color:red;color:#fff;}
+
+/*****************************************************************************/
+/*
+/* Standard Form
+/*
+/*****************************************************************************/
+
+.standard_form {
+  width: 96%;
+  background-color: #DCF6DD; /*#EDF3FE*/
+	border:1px #ddd solid;
+  padding: 2% 2% 1% 2%;
+}
+
+.p_for_submit{
+	background:#fff;font-size:10pt;padding:0.3em;margin-bottom:1em;
+}
+.p_for_submit a{color:green;font-size:10pt;}
+
+.standard_form h1 {
+  font-size: 160%;
+  margin-bottom: 1em;
+	font-weight:bold;
+}
+
+.standard_form h1 a {
+  font-size: 70%;
+  font-weight: normal;
+}
+
+.standard_form p {
+  margin: .5em 0;
+}
+
+.standard_form p.note {color: #a00;font-size:8pt;}
+.standard_form form td{padding-left:10px;}
+.standard_form form label,
+.standard_form form .label,
+label.standard {
+  font-size: 110%;
+  color: #666;
+  display: block;
+  margin: 0;
+  margin-top: 1em;
+}
+
+.standard_form form label.no_style{
+	color:#000;
+	margin:0;
+	display:block;
+	font-size:100%;
+	padding:0;
+}
+
+.standard_form form label a {
+  font-size: 90%;
+}
+
+.standard_form form label.error {
+  color: #a00;
+}
+
+.standard_form form .label label {
+  margin: 0;
+  color: black;
+  font-size: 95%;
+}
+
+.standard_form form .label span {
+  font-size: 90%;
+  color: #888;
+}
+
+.standard_form form input.text,
+.standard_form form textarea {
+  padding: 5px;
+  border: 1px solid #888;
+}
+
+.standard_form form input.text {
+  font-size: 110%;
+}
+
+.standard_form form textarea {
+}
+
+.standard_form form input.submit {
+  font-size: 120%;
+  padding: .1em 1em;
+}
+
+.standard_form form label.error input.text,
+.standard_form form label.error textarea {
+  border: 1px solid #a00;
+  background-color: #f2e1e1;
+}
+
+.standard_form select{width:300px;}
