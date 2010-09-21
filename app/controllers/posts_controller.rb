@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.find(:all, :order => "position, created_at DESC")
+    @posts = Post.find(:all, :order => "position, created_at DESC", :include => [:assets, :comments])
 
     respond_to do |format|
       format.html # index.html.erb
