@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20101012141156) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "sessions", :force => true do |t|
-    t.string   "session_id", :null => false
+    t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
