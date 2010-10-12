@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_filter :login_required
+  
   layout  "layout"
   
   # GET /posts
@@ -44,15 +46,17 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(params[:post])
     @post.save
+    Feed.create_post(@post)
   end
 
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-    @post = Post.find(params[:id])
+    @post = @current_user.posts.find(params[:id])
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
+        Feed.update_post(@post)
         flash[:notice] = 'Post was successfully updated.'
         format.html { redirect_to(@post) }
         format.xml  { head :ok }
@@ -66,14 +70,19 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.xml
   def destroy
-    @post = Post.find(params[:post])
-    @post.destroy
+    @post = @current_user.posts.find(params[:post])
+    if @post then
+      Feed.destroy_post(@post)
+      @post.destroy
+    end
   end
   
   def sort_posts
     params[:posts_list].each_with_index do |id, index|
-        Post.update_all(['position=?', index+1], ['id=?', id])
+      Post.update_all(['position=?', index+1], ['id=?', id])
+      Feed.sort_posts(@current_user)
     end
+
     render :nothing => true
   end
   

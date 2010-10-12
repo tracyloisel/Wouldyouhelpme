@@ -55,14 +55,14 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_WouldYouHelpMe_session',
-    :secret      => '876b6584e80901df6a127ad34bda06247e5b182b14a29d90ec29e1583ecb59ae6f437ab2ea889f7115fb01fcccb878ff8ccda52384421f7b97ba2f929045642f'
+    :session_key => ENV['REST_AUTH_SITE_KEY'],
+    :secret      => ENV['SECRET_REST_AUTH_SITE_KEY']
   }
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
-  # config.action_controller.session_store = :active_record_store
+  config.action_controller.session_store = :active_record_store
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -73,6 +73,17 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
   
+  #config.active_record.observers = :user_observer
+  
   config.gem 'geokit'
-  config.gem 'will_paginate'
+  config.gem 'will_paginate'  
 end
+
+ActionMailer::Base.smtp_settings = {
+                                      :address  => "smtp.gmail.com",
+                                      :domain => "gmail.com",
+                                      :user_name => ENV['GMAIL_USER'],
+                                      :password => ENV['GMAIL_PASSWORD'],
+                                      :authentication => :login,
+                                      :port  => 587
+}

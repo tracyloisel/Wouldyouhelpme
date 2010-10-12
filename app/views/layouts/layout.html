@@ -84,85 +84,67 @@ function async(f) { async.f.push(f) }; async.f = []
   <div class="tab_container"> 
 		<div id="title">WouldYouHelp.Me?</div>
 	
-    <ul class="tabs"> 
-    	<li><a href="#">Welcome</a></li> 
+    <ul class="tabs">
+			<% if @current_user then %>
+    	<li><a href="/welcome/feeds" class="<%= current_tab('welcome')%>">Newsfeed</a></li>
+			<% else %>
+    	<li><a href="/welcome" class="<%= current_tab('welcome')%>">Welcome</a></li>			
+			<% end %>
+  		<li><a href="/rooms" class="<%= current_tab('rooms') %>">Rooms</a></li>
+  		<li><a href="/posts" class="<%= current_tab('posts') %>">Posts</a></li>
+  		<li><a href="/assets" class="<%= current_tab('assets') %>">Assets</a></li>
+  		<li><a href="/map" class="<%= current_tab('map') %>">Map</a></li>
+		</ul>
 
-  		<li><a href="/posts" class="current">Feeds</a></li>
-		</ul> 
-
-	  <ul id="account_links">       
-			<a href="/account/logout">Logout</a>
+	  <ul id="account_links">
+		<% if @current_user then %>
+			<li><a href="/account"><%= @current_user.login %>'s account</a><li>
+			<li><a href="/logout">Logout</a></li>
+		<% else %>
+			<li><a href="/signup">Sign Up</a></li>
+		<% end %>
 	  </ul>
   </div> 
 </div> 
  
  
 <div id="Wrapper"> 
-  <div class="fix_width"> 
+<div class="fix_width"> 
  
 <div id="Container"> 
-  <table id="container_content"><tr><td class="container_content_column" id="main_column"> 
+  <table id="container_content">
+	<tr>
+		<td class="container_content_column" id="main_column">
+
+			<% if flash[:notice] then %>
+			<div id="notification">
+				<b style="font-size:14pt;"><i>Notification</i></b><br/>
+				<%= flash[:notice]%>
+			</div>
+			<% end %>
+
     <div id="Main"> 
       <div class="inner"> 
 				<%= yield %>
+			</div>
+		</div>
   </td>
 	<td class="container_content_column" id="sidebar_column"> 
     <div id="Sidebar"> 
       <div id="Pages">
 				<%= yield :sidebar %>
 			</div>
-
-		  <div class="SidebarAd"> 
-			  <h2 style="color:red;">What you can do</h2>
-				<p>
-					1. You can write posts
-				</p>
-				<p>
-					2. You can sort posts by drag&drop
-				</p>
-				<p>
-					3. You can comment posts
-				</p>
-				<p>
-					4. You can upload files to share
-				</p>
-		  </div>
-		
-		  <div class="SidebarAd"> 
-			  <h2 style="color:red;">Next functions to add</h2>
-				<p>
-					1. Authentification with recaptcha code
-				</p>
-				<p>
-					2. Email functions
-				</p>
-				<p>
-					3. Add an event
-				</p>
-				<p>
-					4. List of all files
-				</p>
-				<p>
-					5. Archive posts instead of delete
-				</p>
-				<p>
-					6. Add an Office-like editor Tiny-MCE
-				</p>
-				<p>
-					7. Sort comments
-				</p>
-		  </div>
-  
     </div> 
-  </div> 
-</td></tr></table> 
+	</td>
+	</tr>
+	</table> 
  
   <div id="BottomShadow"> 
     <div class="inner"> 
 		</div>
 		&nbsp;
  	</div>
-	</div> 
+</div> 
 	
 	<div id="Footer"> 
 	  <p>
@@ -171,6 +153,7 @@ function async(f) { async.f.push(f) }; async.f = []
 		</p>
 	</div>
 </div> 
+</div>
 
 <div id="comments_box" style="display:none;">
 </div>

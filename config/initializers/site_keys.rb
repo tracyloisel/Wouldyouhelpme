@@ -1,3 +1,11 @@
+ENV['GMAIL_USER']     = 'www.wouldyouhelp.me@gmail.com'
+ENV['GMAIL_PASSWORD'] = 'brusselsisgood'
+
+ENV['RequestForgeryProtection'] = '55b8d62b43b04581e7ebcced09395023'
+
+ENV['RECAPTCHA_PUBLIC_KEY']   = '6Lciy70SAAAAABC76NqOI-Vhc33CYtqLlFL2xHl7'
+ENV['RECAPTCHA_PRIVATE_KEY']  = '6Lciy70SAAAAANGy1KLF1nt8qaLl7NdEDBkZTyTA'
+ENV['RECAPTCHA_DOMAIN_NAME']  = 'www.wouldyouhelp.me'
 
 # A Site key gives additional protection against a dictionary attack if your
 # DB is ever compromised.  With no site key, we store
@@ -16,8 +24,8 @@
 # Please note: if you change this, all the passwords will be invalidated, so DO
 # keep it someplace secure.  Use the random value given or type in the lyrics to
 # your favorite Jay-Z song or something; any moderately long, unpredictable text.
-REST_AUTH_SITE_KEY         = '208dcb969ec52b541231f25d7e1ce93958443823'
-  
+REST_AUTH_SITE_KEY        = '_WouldYouHelpMe_session'
+SECRET_REST_AUTH_SITE_KEY  = '876b6584e80901df6a127ad34bda06247e5b182b14a29d90ec29e1583ecb59ae6f437ab2ea889f7115fb01fcccb878ff8ccda52384421f7b97ba2f929045642f'
 # Repeated applications of the hash make brute force (even with a compromised
 # database and site key) harder, and scale with Moore's law.
 #

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918103516) do
+ActiveRecord::Schema.define(:version => 20101012141156) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -34,6 +34,30 @@ ActiveRecord::Schema.define(:version => 20100918103516) do
 
   add_index "comments", ["post_id", "user_id"], :name => "index_comments_on_post_id_and_user_id"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.string   "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["locked_by"], :name => "index_delayed_jobs_on_locked_by"
+
+  create_table "feeds", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "object_id"
+    t.integer  "kind"
+    t.string   "cache_content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "logged_exceptions", :force => true do |t|
     t.string   "exception_class"
     t.string   "controller_name"
@@ -53,9 +77,21 @@ ActiveRecord::Schema.define(:version => 20100918103516) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.integer  "comments_count",   :default => 0
+    t.string   "title"
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
     t.string   "login",                     :limit => 40
@@ -67,6 +103,17 @@ ActiveRecord::Schema.define(:version => 20100918103516) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
+    t.string   "godfather_email"
+    t.boolean  "activate",                                 :default => false
+    t.string   "activation_code"
+    t.string   "email_activation_code"
+    t.string   "new_email"
+    t.datetime "last_activity"
+    t.integer  "posts_count",                              :default => 0
+    t.integer  "comments_count",                           :default => 0
+    t.string   "status",                                   :default => ""
+    t.integer  "gender",                                   :default => -1
+    t.string   "organization"
   end
 
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true

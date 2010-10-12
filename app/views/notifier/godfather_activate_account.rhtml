@@ -1,0 +1,46 @@
+<h2>A new user want to join WouldYouHelp.Me</h2>
+
+<p>
+	<b>Hi <%= @user.name %>, below you have account infos about this new user :</b>
+</p>
+
+<p>
+	<%= gravatar_for(@user) %>
+</p>
+
+<p>
+	His name : <%= @user.name %>
+</p>
+
+<p>
+	His Login : <%= @user.login %>
+</p>
+
+<p>
+	His Email : <%= @user.email %>
+</p>
+
+<p>
+	If you know this user, please follow the link below to activate his account :<br/>
+	<a href="http://www.wouldyouhelp.me/activate/<%= @user.activation_code %>">
+		http://www.wouldyouhelp.me/activate/<%= @user.activation_code %>
+	</a>
+</p>
+
+<p>
+	But if you do NOT know this user, please follow the link below to reject his account :<br/>
+	<a href="http://www.wouldyouhelp.me/reject/<%= @user.activation_code %>">
+		http://www.wouldyouhelp.me/reject/<%= @user.activation_code %>
+	</a>
+</p>
+
+--
+<br/>
+Thank you buddy!
+<br/>
+
+<p>
+WouldYouHelp.Me Notifier System<br/>
+Admin : tracy.loisel@onwild.com (France)<br/>
+Ecologeek / Europe-Ecologie
+</p>

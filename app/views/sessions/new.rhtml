@@ -1,0 +1,112 @@
+<% content_for :sidebar do %>
+<div class="SidebarAd">
+	<h2 style="color:red;">Partner organizations</h2>
+	
+	<br/><br/>
+	
+	<p>
+		<a href="http://www.europeangreens.eu" target='_blank'>
+			<img src="http://europeangreens.eu/fileadmin/i/egp_logo_2010.png" style="width:100%;"/>
+		</a>
+	</p>
+	
+	<br/><br/>
+	
+	<p>
+		<a href="http://www.ekologeek.com" target="_blank">
+			<img 	src="http://www.ekologeek.org/wp-content/bannieres/carre-150.png"
+			  		alt="ekolo[geek]" style="width:150px;height:150px;" />
+		</a>
+	</p>
+</div>
+<% end %>
+
+<div id="page_top">
+  <div id="page_top_content" class="page_top_content"> 
+    <div class="page_top">
+        <div class="page_header" id="page_header"> 
+          <div id="widget_bar"> 
+						<div class="widget_bar"> 
+  						<div class="widget_bar_links tags_hidden"> 
+				        <span class="sharing_link"> 
+				            <i>Nombre de posts : <%= Post.count %></i>
+				        </span>
+    
+					      <b>
+									You're here : Log In Page
+								</b>
+  						</div> 
+						</div> 
+					</div>
+    		</div>
+  		</div>
+		</div>
+
+		<div id="signup" class="page content">
+			<div class="inner">
+				
+				<div id="signup-form" class="standard_form">
+					<h1>Log In inside</h1>
+					
+					<% if flash[:error] then %>
+					<div class="errorExplanation" id="errorExplanation">
+						<%= flash[:error]%>
+					</div>
+					<% end %>
+					
+					<% form_tag session_path do -%>
+						<p>
+							<%= label_tag 'login' %>
+							<%= text_field_tag 'login', @login, :class => :text, :style => "width:350px;" %>
+						</p>
+
+						<p>
+							<%= label_tag 'password' %>
+							<%= password_field_tag 'password', nil, :class => :text, :style => "width:350px;"%>
+						</p>
+
+						<p>
+							<label>
+								<%= check_box_tag 'remember_me', '1', @remember_me %>
+								Remember me for two weeks
+							</label>
+						</p>
+						
+						<p class="p_for_submit greencanvas" style="background:#DCF6DD;">
+							<%= submit_tag 'Log in now' %> or
+							<a href="/signup">Sign Up instead</a>
+						</p>
+					<% end -%>
+				</div>
+				
+				<div id="signup-legend" style="background-color:#EDF3FE;">
+					<p>
+						<b>How today is intense ?</b>
+					</p>
+					
+					<p>
+						Today's posts : 
+						<%= Post.count(:all, :conditions => "created_at >= '#{Time.now.strftime('%Y-%m-%d')}'")%>
+					</p>
+					
+					<p>
+						Today's comments : 
+						<%= Comment.count(:all, :conditions => "created_at >= '#{Time.now.strftime('%Y-%m-%d')}'")%>
+					</p>
+					
+					<p>
+						Total interesting people : 
+						<%= User.count %>
+					</p>
+					
+					<p>
+						Total files shared : <%= Asset.count %>
+					</p>
+					
+				</div>
+			
+			</div>
+		</div>
+
+  </div> 
+</div>

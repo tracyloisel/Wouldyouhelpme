@@ -3515,11 +3515,10 @@ TABS
 
 .tab_container ul#account_links {
   float: right;
-  width: 100px;
+  width: 180px;
   text-align: right;
   font-size: 10px;
   color: #F0D1B2;
-  margin-right: 10px;
 }
 
 div.tab_container a:link,

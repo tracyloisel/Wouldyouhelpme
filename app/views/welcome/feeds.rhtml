@@ -1,0 +1,59 @@
+<% content_for :sidebar do %>
+<div class="SidebarAd">
+	<h2 style="color:red;">Current users logged in</h2>
+	<% User.find(:all, :conditions => "last_activity >= '#{3.minutes.ago}'").each do |user| %>
+	<p>
+			<table>
+				<tr>
+					<td>
+						<%= gravatar_for(user) %>
+					</td>
+					<td>
+						<%= user.name %> <br/>
+						<i><%= user.posts_count %> posts</i><br/>
+						<i><%= user.comments_count %> comments</i>						
+					</td>
+				</tr>
+			</table>
+	</p>
+	<% end %>
+</div>
+<% end %>
+
+<div id="page_top">
+  <div id="page_top_content" class="page_top_content"> 
+    <div class="page_top">
+        <div class="page_header" id="page_header"> 
+          <div id="widget_bar"> 
+						<div class="widget_bar"> 
+  						<div class="widget_bar_links tags_hidden"> 
+				        <span class="sharing_link"> 
+				            <i>Nombre de posts : <%= Post.count %></i>
+				        </span>
+    
+					      <h2><b>Today we are the <%= Time.now.strftime("%d/%m/%Y")%></b></h2>
+  						</div> 
+						</div> 
+					</div>
+    		</div>
+  		</div>
+		</div>
+
+		<div id="newsfeeds" class="page content">
+			<div class="inner">
+				<h1>Latest activities</h1>
+				
+				<p class="latest_activity_tip">
+					<strong>Hey psst...</strong> This page is really useful when you connect in a day to know 
+					quickly what happen in Europe for greens. The Newsfeeds lets you know when your colleagues 
+					post new content, comment other posts, add calendar events, share files and more.
+				</p> 
+        
+				<div id="newsfeeds_list">
+					<%= render :partial => "day_feeds", :collection => @days_feeds %>
+				</div>
+			</div>
+		</div>
+
+  </div> 
+</div>

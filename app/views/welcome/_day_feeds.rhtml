@@ -1,0 +1,15 @@
+<% if day_feeds.size > 0 then %>
+<div class="day_newsfeeds">
+<table>
+	<tr> 
+		<th colspan="2">
+			<h2>
+				<%= distance_of_day_in_word(day_feeds.first[:feeds].first.created_at) %>
+			</h2>
+		</th> 
+	</tr>
+	
+	<%= render :partial => "welcome/user_feeds", :collection => day_feeds %>
+</table>
+<% end %>
+</div>

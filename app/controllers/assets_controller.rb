@@ -1,4 +1,6 @@
 class AssetsController < ApplicationController
+  before_filter :login_required
+  
   # GET /assets
   # GET /assets.xml
   def index
@@ -74,8 +76,12 @@ class AssetsController < ApplicationController
   # DELETE /assets/1
   # DELETE /assets/1.xml
   def destroy
-    @assets = Assets.find(params[:id])
-    @assets.destroy
+    @asset = @current_user.assets.find(params[:id])
+    
+    if @asset then
+      Feed.destroy_asset(@asset)
+      @asset.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to(assets_url) }
@@ -84,13 +90,14 @@ class AssetsController < ApplicationController
   end
   
   def upload
-    @asset  = Asset.create! params[:asset]
+    @asset  = @current_user.assets.create! params[:asset]
     
     if @asset.errors.empty? then
-      @post = Post.create(params[:post])
+      @post = @current_user.posts.create(params[:post])
       
       if @post.errors.empty? then
-        @asset.update_attributes(:post_id => @post.id, :email => @post.email, :user_id => @post.user_id)
+        @asset.update_attributes(:post_id => @post.id, :email => @post.email)
+        Feed.create_asset(@asset)
       end
     end
     

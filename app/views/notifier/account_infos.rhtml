@@ -1,0 +1,41 @@
+<h2>Hi <%= @user.name.capitalize %>, below your account infos!</h2>
+
+<p>
+ 	Account created at : <%= @user.created_at.strftime("%d-%m-%Y %Hh:%Mm") %>
+</p>
+
+<p>
+	<%= gravatar_for @user %>
+</p>
+
+<p>
+	Your name : <%= @user.name %>
+</p>
+
+<p>
+	Your Login : <%= @user.login %>
+<p>
+	
+<p>
+	Your Email : <%= @user.email %>
+</p>
+
+<p>
+	Your Godfather email : <%= @user.godfather_email %>
+</p>
+
+<p>
+	To log in your account, please follow the link below :<br/>
+	<a href="http://www.wouldyouhelp.me/login">Link to log in</a>
+</p>
+
+--
+<br/>
+Best regards,
+<br/>
+
+<p>
+WouldYouHelp.Me Notifier System<br/>
+Admin : tracy.loisel@onwild.com (France)<br/>
+Ecologeek / Europe-Ecologie
+</p>

@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
+  before_filter :login_required
+  
   layout  "public"
+  
   # GET /comments
   # GET /comments.xml
   def index
@@ -43,13 +46,17 @@ class CommentsController < ApplicationController
   def create
     @post     = Post.find(params[:post])
     @comment  = @post.comments.create(params[:comment])
-    @comment.save
+    
+    if @comment.save then
+      Feed.create_comment(@comment)
+      Delayed::Job.enqueue(DelayedJob::MailNewComment.new(@comment.id))
+    end
   end
 
   # PUT /comments/1
   # PUT /comments/1.xml
   def update
-    @comment = Comment.find(params[:id])
+    @comment = @current_user.comments.find(params[:id])
 
     respond_to do |format|
       if @comment.update_attributes(params[:comment])
@@ -66,7 +73,11 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    @comment = Comment.find(params[:comment])
-    @comment.destroy
+    @comment = @current_user.comments.find(params[:comment])
+    
+    if @comment then
+      Feed.destroy_comment(@comment)
+      @comment.destroy
+    end
   end
 end

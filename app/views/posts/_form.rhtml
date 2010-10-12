@@ -5,13 +5,20 @@
 	<h1>Write something</h1>
 	
 	<table><tbody>
+		<%= hidden_field :post, :user_id, :value => @current_user.id %>
+
 	<tr>
-		<td><%= form.label :email, "Your email" %></td>
+		<td><%= form.label :title, "Give a title to your post" %></td>
+		<td><%= form.text_field	:title, :class => :text, :style => "width:500px" %></td>
+	</tr>
+			
+	<tr>
+		<td><%= form.label :email, "Share your email" %></td>
 		<td><%= form.text_field	:email, :class => :text, :style => "width:500px" %></td>
 	</tr>
 
 	<tr>
-		<td><%= form.label :content, "You say" %></td>
+		<td><%= form.label :content, "And now You say ?" %></td>
 		<td>
 			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:100px;" %>
 			<p class="note">If you write elegantly, people will answer you more quickly</p>

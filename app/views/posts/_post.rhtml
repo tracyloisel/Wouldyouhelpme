@@ -10,10 +10,20 @@
 	<table>
 		<tbody>
 			<tr>
+				<td><b>Title</b></td>
+				<td>
+					<b style="font-size:12pt;">
+						<%= post.title %>
+					</b>
+				</td>
+			</tr>
+			
+			<tr>
 				<td><b>Author</b></td>
 				<td>
 					<b>
-						<a href="mailto:<%= post.email %>"><%= post.email %></a> à <%= post.created_at.strftime("%Hh:%Mm")%>
+						<a href="mailto:<%= post.email %>"><%= post.user && post.user.login || post.email %></a> 
+						à <%= post.created_at.strftime("%Hh:%Mm")%>
 					</b>
 				</td>
 			</tr>
@@ -32,17 +42,21 @@
 			<tr>
 				<td style="padding-right:10px;">Message</td>
 				<td>
-					<%= post.content%>
+					<%= RedCloth.new(post.content.to_s).to_html %>
 					<br/>
 					<%= link_to_remote 	"Add a comment (#{post.comments.count})",
-					 										:url => {:action => :show_comments, :post => post.id, :controller => :posts} %> or
+					 										:url => {:action => :show_comments, :post => post.id, :controller => :posts} %>
+					
+					<% if @current_user.id == post.user_id then %>
+					or
 					
 					<span class="delete_link">
-					<%= link_to_remote 	"Delete this message",
+					<%= link_to_remote 	"Delete your message",
 					 										:url => {:action => :destroy, :post => post.id, :controller => :posts},
 															:loading => "new Effect.Appear('post_#{post.id}_gif')",
 															:confirm => "Are you sure you want to delete definitively this message and all the comments associated with ?" %>
 					</span>
+					<% end %>
 
 					<%= image_tag '/images/indicator.gif', :id => "post_#{post.id}_gif", :style => "display:none;" %>
 				</td>

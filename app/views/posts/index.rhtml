@@ -26,6 +26,47 @@
 		</ul>
 	</div>
 </div>
+
+<div class="SidebarAd">
+  <h2 style="color:red;">What you can do</h2>
+	<p>
+		1. You can write posts to share with other people.
+	</p>
+	<p>
+		2. You can sort posts by drag&drop
+	</p>
+	<p>
+		3. You can comment posts
+	</p>
+	<p>
+		4. You can upload files to share
+	</p>
+</div>
+
+<div class="SidebarAd"> 
+  <h2 style="color:red;">Next functions to add</h2>
+	<p>
+		1. Authentification with recaptcha code
+	</p>
+	<p>
+		2. Email functions
+	</p>
+	<p>
+		3. Add an event
+	</p>
+	<p>
+		4. List of all files
+	</p>
+	<p>
+		5. Archive posts instead of delete
+	</p>
+	<p>
+		6. Add an Office-like editor Tiny-MCE
+	</p>
+	<p>
+		7. Sort comments
+	</p>
+</div>
 <% end %>
 
 <div id="page_top">
@@ -67,11 +108,11 @@
 					If only a few people sort, users sort will fail, whereas if everybody participates, users sort will become very interesting and <i>trustful</i>!
 				</p>
 				
-				<div id="form_new_post" class="standard_form" style="display:none;">
+				<div id="form_new_post" class="standard_form greencanvas" style="display:none;">
 					<%= render :partial => "posts/form" %>
 				</div>
 				
-				<div id="form_upload_file" class="standard_form" style="background-color:#fffccc;display:none;">
+				<div id="form_upload_file" class="standard_form yellowcanvas" style="display:none;">
 					<%= render :partial => "posts/upload_file" %>
 				</div>
 				

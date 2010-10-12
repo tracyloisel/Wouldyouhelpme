@@ -1,0 +1,35 @@
+<h2><%= @user.name %> is now waiting for your opinion</h2>
+
+<p>
+	This mail concerns the post titled : <%= @post.title %>, written by <%= @post.user.name if @post.user %>.
+</p>
+	
+<div style='padding-top:10px;'>
+	<i><%= distance_of_time_in_words(@comment.created_at, Time.now) %> ago he wrote :</i>
+	<br/>
+	
+	<div style='border:2px green solid;background-color:#DCF6DD;padding:5px'>
+		<%= @comment.content %>	
+	</div>
+</div>
+
+<br/>
+
+<div style='padding-top:10px;'>
+	<i>For your memory, below the content of the post :</i><br/>
+	
+	<div style='border:2px #orange solid;background-color:#fffccc;padding:5px'>
+		<%= @post.content %>	
+	</div>
+</div>
+
+--
+<br/>
+Best regards,
+<br/>
+
+<p>
+WouldYouHelp.Me Notifier System<br/>
+Admin : tracy.loisel@onwild.com (France)<br/>
+Ecologeek / Europe-Ecologie
+</p>

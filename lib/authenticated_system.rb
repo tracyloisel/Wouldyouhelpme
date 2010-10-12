@@ -9,7 +9,15 @@ module AuthenticatedSystem
     # Accesses the current user from the session.
     # Future calls avoid the database because nil is not equal to false.
     def current_user
-      @current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie) unless @current_user == false
+      ((@current_user ||= (login_from_session || login_from_basic_auth || login_from_cookie)) && update_last_activity) unless @current_user == false
+    end
+    
+    def update_last_activity
+      if @current_user then
+        @current_user.update_attributes(:last_activity => Time.now) 
+      else
+        false
+      end
     end
 
     # Store the given user id in the session.

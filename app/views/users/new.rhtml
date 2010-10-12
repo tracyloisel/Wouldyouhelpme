@@ -1,0 +1,129 @@
+<% content_for :sidebar do %>
+<div class="SidebarAd">
+	<h2 style="color:red;">Partner organizations</h2>
+	
+	<br/><br/>
+	
+	<p>
+		<a href="http://www.europeangreens.eu" target='_blank'>
+			<img src="http://europeangreens.eu/fileadmin/i/egp_logo_2010.png" style="width:100%;"/>
+		</a>
+	</p>
+	
+	<br/><br/>
+	
+	<p>
+		<a href="http://www.ekologeek.com" target="_blank">
+			<img 	src="http://www.ekologeek.org/wp-content/bannieres/carre-150.png"
+			  		alt="ekolo[geek]" style="width:150px;height:150px;" />
+		</a>
+	</p>
+</div>
+<% end %>
+
+<div id="page_top">
+  <div id="page_top_content" class="page_top_content"> 
+    <div class="page_top">
+        <div class="page_header" id="page_header"> 
+          <div id="widget_bar"> 
+						<div class="widget_bar"> 
+  						<div class="widget_bar_links tags_hidden"> 
+				        <span class="sharing_link"> 
+				            <i>Nombre de posts : <%= Post.count %></i>
+				        </span>
+    
+					      <b>
+									You're here : Sign up Page
+								</b>
+  						</div> 
+						</div> 
+					</div>
+    		</div>
+  		</div>
+		</div>
+
+		<div id="signup" class="page content">
+			<div class="inner">
+				
+				<div id="signup-form" class="standard_form">
+					<h1>Sign up as a new user</h1>
+				
+					<% @user.password = @user.password_confirmation = nil %>
+
+					<%= error_messages_for :user %>
+				
+					<% form_for :user, :url => users_path do |f| -%>
+						<p>
+							<%= f.label :name, "Full name" %>
+							<%= f.text_field :name, :class => :text, :style => "width:350px;" %>
+						</p>
+					
+						<p>
+							<%= f.label :login, "Login or Nickname" %>
+							<%= f.text_field :login, :class => :text, :style => "width:350px;" %>
+						</p>
+
+						<p>
+							<%= f.label :email %>
+							<%= f.text_field :email, :class => :text, :style => "width:350px;" %>
+						</p>
+						
+						<p>
+							<%= f.label :godfather_email, "Godfather e-mail" %>
+							<%= f.text_field :godfather_email, :class => :text, :style => "width:350px;" %>
+						</p>
+
+						<p>
+							<%= f.label :password %>
+							<%= f.password_field :password, :class => :text, :style => "width:350px;" %>
+						</p>
+
+						<p>
+							<%= f.label :password_confirmation, 'Confirm Password' %>
+							<%= f.password_field :password_confirmation, :class => :text, :style => "width:350px;" %>
+						</p>
+
+						<p>
+							<%= f.label :recaptcha_challenge_field, "Test humain" %>
+						<script type="text/javascript" src="http://api.recaptcha.net/challenge?k=6Lciy70SAAAAABC76NqOI-Vhc33CYtqLlFL2xHl7&error=expression"></script> 
+						<noscript> 
+						  <iframe src="http://api.recaptcha.net/noscript?k=6Lciy70SAAAAABC76NqOI-Vhc33CYtqLlFL2xHl7" height="300" width="500" frameborder="0"></iframe><br/> 
+						  <textarea id="recaptcha_challenge_field" name="recaptcha_challenge_field" rows="3" cols="40"></textarea> 
+						  <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+						</noscript> 
+
+						</p>
+						<p class="p_for_submit greencanvas" style="background:#DCF6DD;">
+							<%= submit_tag 'Sign up now' %> or
+							<a href="/login">Log in instead</a>
+						</p>
+					<% end -%>
+				</div>
+				
+				<div id="signup-legend">
+					<p>
+						<b>What will happen after ?</b>
+					</p>
+					
+					<p>
+						An e-Mail will be send to your <i>godfather</i> right away after you create your account.
+					</p>
+					
+					<p>
+						You will receive an e-mail as soon as he confirm your account and let you start publish inside WouldYouHelp.me
+					</p>
+					
+					<p>
+						At your first connection you will see what you can do inside the platform and so you will start immediately to share with others.
+					</p>
+					
+					<p>
+						Don't be afraid, you will receive an e-mail with all of this instruction.
+					</p>
+				</div>
+			
+			</div>
+		</div>
+
+  </div> 
+</div>

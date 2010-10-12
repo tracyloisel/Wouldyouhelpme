@@ -131,11 +131,18 @@ a.delete_link {color:red;}
 /* Standard Form
 /*
 /*****************************************************************************/
+.greencanvas{
+	background-color:#DCF6DD; /*#EDF3FE*/
+	border:1px #ddd solid;
+}
+
+.yellowcanvas{
+	background-color: #fffccc; /*#EDF3FE*/
+	border:1px orange solid;
+}
 
 .standard_form {
   width: 96%;
-  background-color: #DCF6DD; /*#EDF3FE*/
-	border:1px #ddd solid;
   padding: 2% 2% 1% 2%;
 }
 
@@ -201,14 +208,16 @@ label.standard {
 .standard_form form input.text,
 .standard_form form textarea {
   padding: 5px;
-  border: 1px solid #888;
 }
 
 .standard_form form input.text {
   font-size: 110%;
 }
 
+.standard_form form input.text{border:1px solid #888;}
+
 .standard_form form textarea {
+	border: 1px solid #888;
 }
 
 .standard_form form input.submit {
@@ -223,3 +232,22 @@ label.standard {
 }
 
 .standard_form select{width:300px;}
+
+/* WELCOME CUSTOM STYLES */
+div.welcome_description {float:left;width:60%;text-align:justify;}
+#welcome_features_list li{margin-bottom:10px;line-height:20px;background-color:#DCF6DD;color:green;}
+#welcome_signup{float:left;margin-left:5%;width:32%;background-color:blue;text-align:center;padding:10px;color:#fff;}
+#welcome_signup a{color:#fff;text-decoration:none;font-weight:bold;}
+#welcome_signup a:hover{text-decoration:underline;}
+a.signup{font-size:14pt;line-height:30px;}
+
+/* SIGNUP PAGE */
+#signup-form{float:left;width:60%;}
+#signup-legend{float:left;margin-left:1%;width:32%;margin-top:25px;background-color:#fffccc;padding:1%;}
+
+/* FLASH Notification */
+#notification{background-color:#fffccc;color:orange;font-size:12pt;padding:5px;}
+
+/* NEWSFEEDS */
+#Pages ol{list-style: decimal outside;margin-left:0px;-webkit-padding-start:20px;}
+#Main ol{list-style: decimal outside;margin-left:0px;-webkit-padding-start:20px;}

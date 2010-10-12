@@ -1,0 +1,16 @@
+<tr class="event event_group"> 
+	<td class="avatar"><%= gravatar_for user_feeds[:user] %></td>
+
+	<td> 
+		<% if user_feeds[:user].id == @current_user.id then %>
+			You (<%= @current_user.posts_count %> posts and <%= @current_user.comments_count %> comments) 
+			&hellip;
+		<% else %>
+  		<%= user_feeds[:user].name %> 
+			(<%= user_feeds[:user].posts_count %> posts and <%= user_feeds[:user].comments_count %> comments)
+		<% end %>
+  	<ul>
+			<%= render :partial => "welcome/feed", :collection => user_feeds[:feeds] %>
+  	</ul>
+	</td> 
+</tr>
