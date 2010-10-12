@@ -47,10 +47,11 @@ class Notifier < ActionMailer::Base
   end
   
   def new_comment(comment)
-    subject "#{comment.user.login} says something interesting in the conversation ##{comment.post.id}"
+    subject "#{comment.user.login} gave recently his opinion on the post titled #{comment.post.title}"
     from "www.wouldyouhelp.me@gmail.com"
     
     _emails = comment.post.comments.collect{|c| c.email}
+    _emails << comment.post.email
     
     recipients _emails.join(",")
     

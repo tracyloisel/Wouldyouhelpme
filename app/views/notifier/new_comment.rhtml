@@ -9,7 +9,7 @@
 	<br/>
 	
 	<div style='border:2px green solid;background-color:#DCF6DD;padding:5px'>
-		<%= @comment.content %>	
+		<%= RedCloth.new(@comment.content.to_s).to_html %>	
 	</div>
 </div>
 
@@ -19,7 +19,7 @@
 	<i>For your memory, below the content of the post :</i><br/>
 	
 	<div style='border:2px #orange solid;background-color:#fffccc;padding:5px'>
-		<%= @post.content %>	
+		<%= RedCloth.new(@post.content.to_s).to_html %>	
 	</div>
 </div>
 
@@ -29,7 +29,8 @@ Best regards,
 <br/>
 
 <p>
-WouldYouHelp.Me Notifier System<br/>
+Braveheart Notifier System for WouldYouHelp.Me<br/>
 Admin : tracy.loisel@onwild.com (France)<br/>
 Ecologeek / Europe-Ecologie
 </p>
+

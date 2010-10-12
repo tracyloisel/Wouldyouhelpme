@@ -43,7 +43,7 @@ class Feed < ActiveRecord::Base
       
       case self.kind
       when KIND_NEW_ACCOUNT
-        "#{@user.name} just signed up. Send #{@user.gender_pronom} a cheers at #{@user.email} :-)"
+        "#{@user.name} just signed up. Send your salutations to him at #{@user.email} :-)"
       when KIND_UPDATE_ACCOUNT
         "Hey psst... #{@user.login} has update #{@user.gender_pronom} profile at #{@user.updated_at.strftime('%Hh:%Mm:%Ss')}. Have a look at #{@user.profile_url} !"
       when KIND_UPDATE_STATUS

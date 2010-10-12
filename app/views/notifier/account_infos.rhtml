@@ -1,4 +1,4 @@
-<h2>Hi <%= @user.name.capitalize %>, below your account infos!</h2>
+<h2>Hi <%= @user.name %>, below your account infos!</h2>
 
 <p>
  	Account created at : <%= @user.created_at.strftime("%d-%m-%Y %Hh:%Mm") %>
@@ -29,13 +29,20 @@
 	<a href="http://www.wouldyouhelp.me/login">Link to log in</a>
 </p>
 
+<p style="font-size:8pt;">
+	Did you ever create your account on gravatar ?<br/>
+	Gravatar help you decide which picture you want for your profile in a lot of webapps you may use.<br/>
+	Create your account on www.gravatar.com with the same email (<%= @user.email %>) you use to create your account so you will have your picture for your braveheart profile.
+</p>
+
 --
 <br/>
 Best regards,
 <br/>
 
 <p>
-WouldYouHelp.Me Notifier System<br/>
+Braveheart Notifier System for WouldYouHelp.Me<br/>
 Admin : tracy.loisel@onwild.com (France)<br/>
 Ecologeek / Europe-Ecologie
 </p>
+w

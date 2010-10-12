@@ -2,20 +2,22 @@
 	<table>
 		<tr>
 			<td>
-				<img src="/images/gravatar.png" style="background-color:#fff;padding:3px;border:1px #ccc solid;" />
+				<%= gravatar comment.email %>
 			</td>
 			<td>
 				<b>Le <%= comment.created_at.strftime("%d/%m")%> at <%= comment.created_at.strftime("%Hh:%Mm")%>, 
 					 wrote <%= comment.email %> :
 				</b><br/>
 
-				<%= comment.content %>
+				<%= RedCloth.new(comment.content.to_s).to_html %>
 				
+				<% if comment.user and comment.user_id == @current_user.id then %>
 				<div class="delete_link">
-				<%= link_to_remote 	"Delete this comment only if it's your own",
+				<%= link_to_remote 	"Delete your comment",
 														:url => {:action => :destroy, :controller => :comments, :comment => comment.id},
-														:confirm => "Does this comment is your own and are you sure you want to delete it ?" %>
+														:confirm => "Are you sure you want to delete it ?" %>
 				</div>
+				<% end %>
 			</td>
 	</table>
 </div>

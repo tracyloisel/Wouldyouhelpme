@@ -44,9 +44,10 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post])
-    @post.save
-    Feed.create_post(@post)
+    @post = @current_user.posts.build(params[:post])
+    if @post.save then
+      Feed.create_post(@post)
+    end
   end
 
   # PUT /posts/1
@@ -80,8 +81,9 @@ class PostsController < ApplicationController
   def sort_posts
     params[:posts_list].each_with_index do |id, index|
       Post.update_all(['position=?', index+1], ['id=?', id])
-      Feed.sort_posts(@current_user)
     end
+
+    Feed.sort_posts(@current_user)
 
     render :nothing => true
   end
