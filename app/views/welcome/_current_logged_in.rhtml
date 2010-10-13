@@ -1,0 +1,19 @@
+<div class="SidebarAd">
+	<h2 style="color:red;">Current users logged in</h2>
+	<% User.find(:all, :conditions => "last_activity >= '#{3.minutes.ago}'").each do |user| %>
+	<p>
+			<table>
+				<tr>
+					<td>
+						<%= gravatar_for(user) %>
+					</td>
+					<td>
+						<%= user.name %> <br/>
+						<i><%= user.posts_count %> posts</i><br/>
+						<i><%= user.comments_count %> comments</i>						
+					</td>
+				</tr>
+			</table>
+	</p>
+	<% end %>
+</div>

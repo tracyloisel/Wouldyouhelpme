@@ -1,0 +1,25 @@
+<div id="comment_<%= comment.id%>" class="comment_user">
+	<div id="comment_picture_<%= comment.id%>" class="comment_user_picture">
+		<%= gravatar comment.email %>
+	</div>
+	
+	<div class="comment_user_content">
+		<span style="font-size:8pt;color:#666;">
+			<% if @current_user.id == comment.user_id then %>
+			<%= link_to_remote image_tag("/images/trash.gif"),
+												 :url => destroy_comment_path(comment),
+												 :confirm => "Are you sure you want to delete this comment ?"	%>
+			<% end %>
+			
+			<%= comment.email %> said <%= distance_of_time_in_words(comment.created_at, Time.now)%> at 
+			<%= comment.created_at.strftime("%Hh:%Mm:%Ss") %> :
+		</span><br/>
+		
+		<%= comment.content %>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+
+<script>new Tip("comment_picture_<%= comment.id%>", "<%= comment.content %>");</script>
+
