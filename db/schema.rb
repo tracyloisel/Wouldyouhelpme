@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012141156) do
+ActiveRecord::Schema.define(:version => 20101012224814) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20101012141156) do
     t.integer  "position"
     t.integer  "comments_count",   :default => 0
     t.string   "title"
+    t.boolean  "archive",          :default => false
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"

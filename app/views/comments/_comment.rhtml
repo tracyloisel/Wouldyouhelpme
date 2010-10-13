@@ -5,8 +5,7 @@
 				<%= gravatar comment.email %>
 			</td>
 			<td>
-				<b>Le <%= comment.created_at.strftime("%d/%m")%> at <%= comment.created_at.strftime("%Hh:%Mm")%>, 
-					 wrote <%= comment.email %> :
+				<b><%= comment.name %> wrote the <%= comment.created_at.strftime("%d/%m")%> at <%= comment.created_at.strftime("%Hh:%Mm")%> : 
 				</b><br/>
 
 				<%= RedCloth.new(comment.content.to_s).to_html %>

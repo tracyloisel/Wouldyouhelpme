@@ -51,7 +51,8 @@ class Notifier < ActionMailer::Base
     from "www.wouldyouhelp.me@gmail.com"
     
     _emails = comment.post.comments.collect{|c| c.email}
-    _emails << comment.post.email
+    
+    _emails << comment.post.email if comment.post.mail_me_comments
     
     recipients _emails.join(",")
     

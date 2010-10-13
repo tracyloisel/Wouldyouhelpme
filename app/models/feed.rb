@@ -43,32 +43,34 @@ class Feed < ActiveRecord::Base
       
       case self.kind
       when KIND_NEW_ACCOUNT
-        "#{@user.name} just signed up. Send your salutations to him at #{@user.email} :-)"
+        "<b>#{@user.name}</b> just signed up. Send your salutations to him at #{@user.email} :-)"
       when KIND_UPDATE_ACCOUNT
-        "Hey psst... #{@user.login} has update #{@user.gender_pronom} profile at #{@user.updated_at.strftime('%Hh:%Mm:%Ss')}. Have a look at #{@user.profile_url} !"
+        "Hey psst... <b>#{@user.login} has update #{@user.gender_pronom} profile</b> at #{@user.updated_at.strftime('%Hh:%Mm:%Ss')}. Have a look at #{@user.profile_url} !"
       when KIND_UPDATE_STATUS
         "#{@user.status}, #{@user.gender} said."
       when KIND_SORT_POSTS
-        "#{@user.login} sort posts at #{self.created_at.strftime('%Hh:%Mm:%Ss')}"
+        "<b>#{@user.login} sort posts</b> at #{self.created_at.strftime('%Hh:%Mm:%Ss')}"
       when KIND_NEW_POST
-        "#{@post.user.login} add a new post titled #{@post.title}. Never miss the news."
+        "<b>#{@post.user.login} add a new post</b> titled <u>#{@post.title}</u>. Never miss the news."
       when KIND_UPDATE_POST
-        "#{@post.user.login} updated his post titled #{@post.title} at #{@post.updated_at.strftime('%Hh:%Mm:%Ss')}. Do you vote for the changement ?"
+        "<b>#{@post.user.login} updated his post</b> titled <u>#{@post.title}</u> at #{@post.updated_at.strftime('%Hh:%Mm:%Ss')}. Do you vote for the changement ?"
       when KIND_DESTROY_POST
-        "Hmm, that's embarrassing... #{@post.user.login} destroyed his post titled #{@post.title}."
+        "Hmm, that's embarrassing... <b>#{@post.user.login} destroyed his post</b> titled <u>#{@post.title}</u>."
       when KIND_ARCHIVE_POST
-        "Conversations around the post titled #{@post.title} are now closed since the post has been archived by #{self.user.login}"
+        "Conversations around the post titled <u>#{@post.title}</u> are now closed since the post has been archived by #{self.user.login}"
       when KIND_NEW_COMMENT
-        "#{@comment.user.login} add a new comment and warm conversations around the post titled #{@comment.post.title}!"
+        "<b>#{@comment.user.login} add a new comment</b> and warm conversations around the post titled <u>#{@comment.post.title}</u>!"
       when KIND_UPDATE_COMMENT
-        "#{@comment.user.login} updated #{@comment.user.gender_pronom} comment at #{@comment.updated_at.strftime('%Hh:%Mm:%Ss')} for the post titled #{@comment.post.title}!"
+        "<b>#{@comment.user.login} updated #{@comment.user.gender_pronom} comment</b> at #{@comment.updated_at.strftime('%Hh:%Mm:%Ss')} for the post titled <u>#{@comment.post.title}</u>!"
       when KIND_DESTROY_COMMENT
-        "Hmm, it's embarrassing... #{@comment.user.login} destroyed his comment on the post titled #{@comment.post.title}."
+        "Hmm, it's embarrassing... <b>#{@comment.user.login} destroyed his comment</b> on the post titled <u>#{@comment.post.title}</u>."
       when KIND_NEW_FILE
-        "Yeah ! One new file to download thanks to #{@asset.user.login} : << #{@asset.post.content} >>"
+        "Yeah ! <b>One new file to download</b> thanks to #{@asset.user.login} : << #{@asset.post.content} >>"
       when KIND_DESTROY_FILE
-        "Ouch ! #{@asset.user.login} has destroyed the file #{@asset.gender_subject} uploaded the day #{@asset.created_at.strftime('%d/%m/%Y')} : << #{@asset.post.content} >>"
+        "Ouch ! <b>#{@asset.user.login} has destroyed the file</b> #{@asset.gender_subject} uploaded the day #{@asset.created_at.strftime('%d/%m/%Y')} : << #{@asset.post.content} >>"
       end
+    else
+      self.cache_content
     end
   end
   
@@ -82,6 +84,7 @@ class Feed < ActiveRecord::Base
   
   def self.destroy_comment(comment)
     _feed = Feed.create(:user_id => comment.user_id, :kind => KIND_DESTROY_COMMENT, :object_id => comment.id)
+    _feed.update_attributes :cache_content => _feed.message    
   end
   
   def self.create_post(post)
@@ -94,6 +97,7 @@ class Feed < ActiveRecord::Base
   
   def self.destroy_post(post)
     _feed = Feed.create(:user_id => post.user_id, :kind => KIND_DESTROY_POST, :object_id => post.id)
+    _feed.update_attributes :cache_content => _feed.message
   end
 
   def self.archive_post(post)
@@ -106,10 +110,12 @@ class Feed < ActiveRecord::Base
   
   def self.create_asset(asset)
     _feed = Feed.create(:user_id => asset.user_id, :kind => KIND_NEW_FILE, :object_id => asset.id)
+    _feed.update_attributes :cache_content => _feed.message    
   end
     
   def self.destroy_asset(asset)
     _feed = Feed.create(:user_id => asset.user_id, :kind => KIND_DESTROY_FILE, :object_id => asset.id)
+    _feed.update_attributes :cache_content => _feed.message    
   end
   
   def self.create_user(user)

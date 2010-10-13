@@ -52,9 +52,6 @@
 		2.Rooms features
 	</p>	
 	<p>
-		3. List of room's files
-	</p>	
-	<p>
 		4. Geolocalizations features
 	</p>
 	<p>
@@ -72,7 +69,7 @@
   						<div class="widget_bar_links tags_hidden"> 
 				        <span class="sharing_link"> 
 				          <% unless @posts.empty? then %>
-				            <i>Dernier post : <%= @posts.first.created_at.strftime("%d/%m à %Hh:%Mm")%></i>
+				            <i>Last post : <%= @posts.first.created_at.strftime("%d/%m at %Hh:%Mm")%></i>
 				          <% end %>
 				        </span> 
     
@@ -94,7 +91,11 @@
 					<span style="font-size:12pt;">Look at your right, there are links to start </span>
 					<span id="post_nb" style="display:none;"></span></h1>
 				<% else %>
-				<h1>There are currently <span id="post_nb"><%= @posts.size %></span> posts</h1>
+					<% if @posts.size > 1 then %>
+					<h1>There are currently <span id="post_nb"><%= @posts.size %></span> posts</h1>
+					<% else %>
+					<h1>There is currently <span id="post_nb"><%= @posts.size %></span> post</h1>
+					<% end %>
 				<% end %>
 				
 				<p class="legend yellow">
@@ -114,8 +115,12 @@
 					<%= render :partial => "posts/post", :collection => @posts %>
 				</ol>
 				
-				<%= sortable_element "posts_list", :url => {:action => :sort_posts}, :scroll => true %>
+				<%= sortable_element 	"posts_list", :url => {:action => :sort_posts}, 
+															:scroll => 'window', :handle => "handle" %>
 				
+				<div id="posts_archived">
+					and also <%= pluralize(Post.count_archive, "post") %> archived
+				</div>
 			</div>
 		</div>
 

@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = Post.find(:all, :order => "position, created_at DESC", :include => [:assets, :comments])
+    @posts = Post.find(:all, :order => "position, created_at DESC", :include => [:assets, :comments], :conditions => "archive=0")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,17 +78,21 @@ class PostsController < ApplicationController
     end
   end
   
+  def archive
+    @post = Post.find(params[:post])
+    
+    if @post then
+      @post.move_to_archive
+      Feed.archive_post(@post)      
+    end
+  end
+  
   def sort_posts
     params[:posts_list].each_with_index do |id, index|
       Post.update_all(['position=?', index+1], ['id=?', id])
     end
 
     Feed.sort_posts(@current_user)
-
     render :nothing => true
-  end
-  
-  def show_comments
-    @post = Post.find(params[:post])
   end
 end

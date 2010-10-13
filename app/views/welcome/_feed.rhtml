@@ -1,3 +1,7 @@
+<% if feed.message then %>
 <li> 
 	<%= feed.message %>
 </li> 
+<% else %>
+	<% feed.destroy %>
+<% end %>

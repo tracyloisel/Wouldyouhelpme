@@ -44,10 +44,10 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.xml
   def create
-    @post     = Post.find(params[:post])
-    @comment  = @post.comments.create(params[:comment])
+    @comment  = @current_user.comments.create(params[:comment])
     
     if @comment.save then
+      @post = @comment.post
       Feed.create_comment(@comment)
       Delayed::Job.enqueue(DelayedJob::MailNewComment.new(@comment.id))
     end
@@ -73,7 +73,7 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    @comment = @current_user.comments.find(params[:comment])
+    @comment = @current_user.comments.find(params[:id])
     
     if @comment then
       Feed.destroy_comment(@comment)

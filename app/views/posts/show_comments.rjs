@@ -1,2 +1,0 @@
-page.replace_html :comments_box, :partial => "posts/comments"
-page.visual_effect  :Appear, :comments_box, :duration => 0.2

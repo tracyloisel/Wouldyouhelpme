@@ -70,7 +70,6 @@ a {cursor: pointer;}
 .post{
 	padding:5px;
 	border-bottom:1px #333 dashed;
-	line-height:20px;
 }
 
 #comments_box{
@@ -122,9 +121,13 @@ a {cursor: pointer;}
 	border-bottom:1px #ddd dashed;
 }
 
-.delete_link {font-size:8pt;color:red;}
+.delete_link {color:red;}
 a.delete_link {color:red;}
 .delete_link a:hover{background-color:red;color:#fff;}
+
+.archive_link {color:#993300;}
+a.archive_link {color:#993300;}
+.archive_link a:hover{background-color:#993300;color:#fff;}
 
 /*****************************************************************************/
 /*
@@ -251,3 +254,22 @@ a.signup{font-size:14pt;line-height:30px;}
 /* NEWSFEEDS */
 #Pages ol{list-style: decimal outside;margin-left:0px;-webkit-padding-start:20px;}
 #Main ol{list-style: decimal outside;margin-left:0px;-webkit-padding-start:20px;}
+.day_newsfeeds li{margin-bottom:10px;}
+
+.handle{cursor:move;}
+.post_title{line-height:25px;}
+.add_comment{background-color:#DCF6DD;color:green;text-align:center;width:55px;font-size:6pt;}
+
+.comment_user{float:left;margin-bottom:5px;}
+.comment_user_picture{float:left;}
+.comment_user_content{float:left;margin-left:5px;width:480px;background-color:#DCF6DD;padding:5px;}
+.form_comment_user{border-bottom:1px blue solid;padding-bottom:5px;margin-bottom:5px;}
+.form_comment_user_content{float:left;margin-left:5px;width:535px;background-color:#EDF3FE;padding:5px;}
+
+#posts_archived{
+	text-align:center;
+	color:#993300;
+	font-size:10pt;
+	padding:5px;
+	margin-top:10px;
+}

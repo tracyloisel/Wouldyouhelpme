@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :comments
 
   map.resources :posts
-
+  map.destroy_comment "/comments/destroy/:id", :controller => "comments", :action => "destroy"
   map.resources :users, :member => { :suspend => :put, :unsuspend => :put, :purge => :delete }
   
   map.resource :session

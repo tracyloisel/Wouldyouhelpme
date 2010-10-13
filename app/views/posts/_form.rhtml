@@ -1,27 +1,24 @@
-<% remote_form_for 	Post.new,
+<% remote_form_for 	@current_user.posts.new,
 										:url => {:action => :create},
 										:loading => "new Effect.Appear('post_gif')" do |form| %>
 
 	<h1>Write something</h1>
 	
 	<table><tbody>
-		<%= hidden_field :post, :user_id, :value => @current_user.id %>
 
 	<tr>
 		<td><%= form.label :title, "Give a title to your post" %></td>
 		<td><%= form.text_field	:title, :class => :text, :style => "width:500px" %></td>
 	</tr>
-			
-	<tr>
-		<td><%= form.label :email, "Share your email" %></td>
-		<td><%= form.text_field	:email, :class => :text, :style => "width:500px" %></td>
-	</tr>
-
+	
+	<%= hidden_field :post, :email, :value => @current_user.email %>
+	
 	<tr>
 		<td><%= form.label :content, "And now You say ?" %></td>
 		<td>
 			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:100px;" %>
-			<p class="note">If you write elegantly, people will answer you more quickly</p>
+			<p class="note">It is so pleasant when it is written elegantly.</p>
+			<%= hidden_field :post, :user_id, :value => @current_user.id %>
 		</td>
 	</tr>
 	

@@ -1,1 +1,2 @@
 page.visual_effect  :DropOut, "comment_#{@comment.id}"
+page.replace_html "post_comments_count_#{@comment.post.id}", :inline => "#{@comment.post.comments.count}"
