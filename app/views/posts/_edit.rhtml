@@ -19,14 +19,11 @@
 		<td><%= form.text_field	:title, :class => :text, :style => "width:500px" %></td>
 	</tr>
 	
-	<%= hidden_field :post, :email, :value => @current_user.email %>
-
 	<tr>
 		<td><%= form.label :content, "Development" %></td>
 		<td>
 			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:200px;" %>
 			<p class="note">It is so pleasant when it is written elegantly.</p>
-			<%= hidden_field :post, :user_id, :value => @current_user.id %>
 		</td>
 	</tr>
 

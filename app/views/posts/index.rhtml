@@ -14,35 +14,33 @@
 </div>
 
 <div class="SidebarAd">
-  <h2 style="color:red;">What you can do</h2>
-	<p>
-		1. You can write posts to share with other people.
-	</p>
-	<p>
-		2. You can sort posts by drag&drop
-	</p>
-	<p>
-		3. You can comment posts
-	</p>
-	<p>
-		4. You can upload files to share
-	</p>
+  <h2 style="color:red;">Tips when writtin'</h2>
+	_emphasis_<br/>
+	 __italicized__<br/>
+	 *strong*<br/>
+	 **bold**<br/>
+	 ??citation??<br/>
+	 -deleted text-<br/>
+	 +inserted text+<br/>
+	 ^superscript^<br/>
+	 ~subscript~<br/>
+	 @code@<br/>
+	 %(classname)span%<br/>
+	
+	<a href="http://redcloth.org/hobix.com/textile/quick.html" target="_blank">More tips here</a>
 </div>
 
 <div class="SidebarAd"> 
   <h2 style="color:red;">Next functions to add</h2>
 	<p>
-		1. Posts features improvements
+		1. Geolocalizations features
 	</p>
 	<p>
-		2.Rooms features
+		2. User features improvements
+	</p>
+	<p>
+		3. Rooms features
 	</p>	
-	<p>
-		4. Geolocalizations features
-	</p>
-	<p>
-		5. Personal page
-	</p>
 </div>
 <% end %>
 
@@ -72,27 +70,27 @@
 
 		<div id="page_2105674" class="page content">
 			<div class="inner">
-				<% if @posts.size.zero? %>
-				<h1>Please, fill me ! 
-					<span id="post_nb" style="display:none;"></span></h1>
-				<% else %>
 					<% if @posts.size > 1 then %>
-					<h1>There are currently <span id="post_nb"><%= @posts.size %></span> posts</h1>
+						<h1>
+							There are currently <span id="post_nb"><%= @posts.size %></span> posts
+							
+							<%= link_to_function "Start your post, easy", :style => 'font-size:14pt;' do |page|
+										page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
+									end %>
+						</h1>
 					<% else %>
-					<h1>There is currently <span id="post_nb"><%= @posts.size %></span> post</h1>
+						<h1>
+							There is currently <span id="post_nb"><%= @posts.size %></span> post
+						</h1>
 					<% end %>
-				<% end %>
 				
 				<p class="legend yellow">
-					Please people, help this page to stay accurate and useful for everybody. Sort posts just by drag&drop to the position you think good for it.
-					If only a few people sort, users sort will fail, whereas if everybody participates, users sort will become very interesting and <i>trustful</i>!
+					You can sort posts just by drag&drop these to the position you think good for it and
+					to make this social sort useful, we really need your participation and your opinion.
 				</p>
 				
 				<div id="start_posting" class="">
 					<h1>
-						<%= link_to_function "Nothing easy than adding a post..." do |page|
-									page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
-								end %>
 					</h1>
 				</div>
 				
