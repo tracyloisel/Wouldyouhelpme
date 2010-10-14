@@ -17,7 +17,7 @@
 			<%= hidden_comment.created_at.strftime("%Hh:%Mm:%Ss") %> :
 		</span><br/>
 		
-		<%= hidden_comment.content %>
+		<%= RedCloth.new(hidden_comment.content.to_s).to_html %>
 	</div>
 	
 	<div class="clear"></div>

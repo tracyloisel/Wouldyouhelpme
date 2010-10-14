@@ -1,0 +1,31 @@
+<h2><%= @user.name %>, I think this new post could start something giant!</h2>
+
+<p>
+	<%= @post.user.name %> recently wrote a new post on www.wouldyouhelp.me, I think you could be interested in.<br/>
+</p>
+	
+<div style='padding-top:10px;'>
+	<i><%= distance_of_time_in_words(@post.created_at, Time.now) %> ago :</i>
+	<br/>
+
+	<div style='border:2px green solid;background-color:#DCF6DD;padding:5px'>
+		<span style="font-size:15pt;"><b><%= @post.title %></b></span><br/>
+		
+		<%= RedCloth.new(@post.content.to_s).to_html %>	
+	</div>
+</div>
+
+<p>
+	Log in to the platform and please add your contributions. We will be greatful for that.
+</p>
+
+--
+<br/>
+Thank you <%= @user.name %>,
+<br/>
+
+<p>
+Braveheart Notifier System for WouldYouHelp.Me<br/>
+Admin : tracy.loisel@onwild.com (France)<br/>
+Ecologeek / Europe-Ecologie
+</p>

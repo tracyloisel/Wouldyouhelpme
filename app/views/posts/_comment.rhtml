@@ -15,11 +15,10 @@
 			<%= comment.created_at.strftime("%Hh:%Mm:%Ss") %> :
 		</span><br/>
 		
-		<%= comment.content %>
+		<%= RedCloth.new(comment.content.to_s).to_html %>
 	</div>
 	
 	<div class="clear"></div>
 </div>
 
 <script>new Tip("comment_picture_<%= comment.id%>", "<%= comment.content %>");</script>
-

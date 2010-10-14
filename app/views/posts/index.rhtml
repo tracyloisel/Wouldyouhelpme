@@ -8,21 +8,7 @@
 <div id="sidebar_top">
 	<div class="button_to_add_new">
 		<ul>
-			<li>
-				<%= link_to_function "Write something" do |page|
-							page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
-				 		end %>
-			</li>
-			<li>
-				<%= link_to_function "Upload something to share" do |page|
-							page.visual_effect	:toggle_slide, :form_upload_file, :duration => 0.3
-					 	end %>
-			</li>
-			<li style="display:none;">
-				<%= link_to_function "Alert on an event" do |page|
-							page.visual_effect	:toggle_slide, :form_new_event, :duration => 0.3
-						end %>
-			</li>
+
 		</ul>
 	</div>
 </div>
@@ -88,7 +74,6 @@
 			<div class="inner">
 				<% if @posts.size.zero? %>
 				<h1>Please, fill me ! 
-					<span style="font-size:12pt;">Look at your right, there are links to start </span>
 					<span id="post_nb" style="display:none;"></span></h1>
 				<% else %>
 					<% if @posts.size > 1 then %>
@@ -103,12 +88,16 @@
 					If only a few people sort, users sort will fail, whereas if everybody participates, users sort will become very interesting and <i>trustful</i>!
 				</p>
 				
-				<div id="form_new_post" class="standard_form greencanvas" style="display:none;">
-					<%= render :partial => "posts/form" %>
+				<div id="start_posting" class="">
+					<h1>
+						<%= link_to_function "Nothing easy than adding a post..." do |page|
+									page.visual_effect	:toggle_slide, :form_new_post, :duration => 0.3
+								end %>
+					</h1>
 				</div>
 				
-				<div id="form_upload_file" class="standard_form yellowcanvas" style="display:none;">
-					<%= render :partial => "posts/upload_file" %>
+				<div id="form_new_post" class="standard_form greencanvas" style="display:none;">
+					<%= render :partial => "posts/form" %>
 				</div>
 				
 				<ol id="posts_list">

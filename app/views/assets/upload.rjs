@@ -1,6 +1,7 @@
 page.visual_effect  :Fade, :upload_gif
-page.insert_html  :top, :posts_list, :partial => "posts/post", :object => @post, :locals => {:post_counter => 1}
-page.replace_html :post_nb, :inline => "<%= Post.count %>"
-page.visual_effect  :Shake, "post_#{@post.id}"
-page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => true
-page.visual_effect  :SlideUp, :form_upload_file
+page.visual_effect  :Highlight, "post_#{@asset.post.id}"
+page.visual_effect	:toggle_slide, "post_assets_table_#{@asset.post.id}"
+page.replace_html   "post_assets_#{@asset.post.id}", :partial => "posts/asset_reference", :collection => @asset.post.assets
+page.replace_html   :super_box_notification, :inline => "File successfully uploaded. It was a pleasure."
+page.show :super_box_notification
+

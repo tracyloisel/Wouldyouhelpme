@@ -1,4 +1,4 @@
-page.insert_html  :top, "post_comments_list_#{@post.id}", :partial => "posts/comment", :object => @comment
+page.insert_html  :bottom, "post_comments_list_#{@post.id}", :partial => "posts/comment", :object => @comment
 page.replace_html "post_comments_count_#{@post.id}", :inline => "#{@post.comments.count}"
 page.visual_effect  :Fade, "comment_gif_#{@post.id}"
 page.visual_effect  :Pulsate, "comment_#{@comment.id}"

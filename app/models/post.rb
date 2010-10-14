@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   acts_as_list
   
   belongs_to  :user, :counter_cache => true
-  has_many    :comments, :dependent => :destroy, :order => "created_at DESC"
+  has_many    :comments, :dependent => :destroy
   has_many    :assets, :dependent => :destroy
   
   validates_presence_of     :email
@@ -21,5 +21,9 @@ class Post < ActiveRecord::Base
   
   def self.count_archive
     self.count(:all, :conditions => "archive=1")
+  end
+  
+  def self.count_active
+    self.count(:all, :conditions => "archive=0")    
   end
 end

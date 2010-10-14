@@ -1,0 +1,43 @@
+<% if post.authorized_comments then %>
+<div id="form_comment_<%= post.id%>" class="form_comment_user">
+	<div class="form_comment_user_content">
+		<% remote_form_for 	@current_user.comments.new,
+												:url => {:action => :create, :controller => :comments},
+												:loading => "new Effect.Appear('comment_gif_#{post.id}')" do |form| %>
+
+				<%= form.label :content, "Take part to the conversation and pulse this conversation :" %>
+				<%= form.text_area :content, :class => :text, :style => "height:40px;width:525px;" %>
+
+				<%= hidden_field :comment, :post_id, :value => post.id %>
+				<%= hidden_field :comment, :email, :value => @current_user.email %>
+				<br/>
+				
+					<%= submit_tag "Add my opinion now!"%>
+					<%= image_tag '/images/indicator.gif', :id => "comment_gif_#{post.id}", :style => "display:none;"%>
+		<% end%>							
+	</div>
+	
+	<div class="clear"></div>
+</div>
+<% else %>
+<b>This post is now closed to comments.</b>
+<% end %>
+
+<% unless post.display_comments then %>					
+	<%= link_to_function 	"Display all comments" do |page|
+				page.select("#post_#{post.id} div.comment_user_content").each do |elt|
+					elt.setStyle(:display => '')
+					elt.morph("font-size:10pt;", :duration => 0.3)
+				end
+		end %>
+<% end %>
+
+<div class="clear"></div>
+	
+<div id="post_comments_list_<%= post.id %>">
+	<% if post.display_comments then %>
+		<%= render :partial => "posts/comment", :collection => post.comments %>
+	<% else %>
+		<%= render :partial => "posts/hidden_comment", :collection => post.comments %>
+	<% end %>
+</div>

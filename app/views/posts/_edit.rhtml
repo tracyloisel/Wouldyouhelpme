@@ -1,0 +1,69 @@
+<div id="edit_post" class="standard_form greencanvas">
+<% remote_form_for 	@post,
+										:url => {:action => :update, :id => @post},
+										:loading => "new Effect.Appear('post_gif')" do |form| %>
+
+	<h1>Posting is so easy</h1>
+	
+	<div id="super_box_notification" class="notification" style="display:none;">
+	</div>
+	
+	<p class="legend">
+		<i>Once your post will be published, you will also be able to add files to download</i>
+	</p>
+	
+	<table><tbody>
+
+	<tr>
+		<td><%= form.label :title, "Title" %></td>
+		<td><%= form.text_field	:title, :class => :text, :style => "width:500px" %></td>
+	</tr>
+	
+	<%= hidden_field :post, :email, :value => @current_user.email %>
+
+	<tr>
+		<td><%= form.label :content, "Development" %></td>
+		<td>
+			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:200px;" %>
+			<p class="note">It is so pleasant when it is written elegantly.</p>
+			<%= hidden_field :post, :user_id, :value => @current_user.id %>
+		</td>
+	</tr>
+
+	<tr>
+		<td><span class="note">Options</span></td>
+		<td><label class="no_style">
+			<%= form.check_box :mail_me_comments %> Please send me by email all new comments
+		</label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :display_message %> By default display my title AND my message
+		</label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :display_comments %> Display all comments by default
+		</label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :authorized_comments %> Allow people to comment
+		</label></td>
+	</tr>
+	</tbody></table>
+
+	<br/>
+	
+	<p class="p_for_submit">
+		<%= submit_tag "Record my updates now!" %> or
+		<%= link_to_function "Close this form" do |page|
+					page.visual_effect	:Puff, :super_box, :duration => 0.3
+				end %>
+		<%= image_tag '/images/indicator.gif', :id => 'post_gif', :style => "display:none;" %>
+	</p>
+<% end %>
+</div>

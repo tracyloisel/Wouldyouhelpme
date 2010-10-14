@@ -7,4 +7,5 @@ class Asset < ActiveRecord::Base
   validates_as_attachment
                       
   belongs_to  :post
+  belongs_to  :user
 end

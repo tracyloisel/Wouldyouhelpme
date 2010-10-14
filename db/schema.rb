@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101012224814) do
+ActiveRecord::Schema.define(:version => 20101013212508) do
 
   create_table "assets", :force => true do |t|
     t.string   "filename"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20101012224814) do
     t.integer  "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "downloads_count", :default => 0
   end
 
   create_table "comments", :force => true do |t|
@@ -73,13 +74,17 @@ ActiveRecord::Schema.define(:version => 20101012224814) do
     t.integer  "user_id"
     t.string   "email"
     t.text     "content"
-    t.boolean  "mail_me_comments", :default => true
+    t.boolean  "mail_me_comments",    :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
-    t.integer  "comments_count",   :default => 0
+    t.integer  "comments_count",      :default => 0
     t.string   "title"
-    t.boolean  "archive",          :default => false
+    t.boolean  "archive",             :default => false
+    t.boolean  "display_comments",    :default => true
+    t.boolean  "display_message",     :default => false
+    t.boolean  "authorized_comments", :default => true
+    t.integer  "usefullness",         :default => 0
   end
 
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"

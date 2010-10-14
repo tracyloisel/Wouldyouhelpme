@@ -1,0 +1,2 @@
+page.replace_html :super_box, :partial => "assets/form_upload"
+page.visual_effect  :Appear, :super_box, :duration => 0.3

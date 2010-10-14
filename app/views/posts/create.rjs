@@ -3,4 +3,4 @@ page.replace_html :post_nb, :inline => "<%= Post.count %>"
 page.visual_effect  :Fade, :post_gif
 page.visual_effect  :Shake, "post_#{@post.id}"
 page.visual_effect  :SlideUp, :form_new_post
-page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => true
+page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => 'window', :handle => "handle"

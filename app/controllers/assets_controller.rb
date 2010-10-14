@@ -11,6 +11,13 @@ class AssetsController < ApplicationController
       format.xml  { render :xml => @assets }
     end
   end
+  
+  def download
+    @asset = Asset.find(params[:id])
+    @asset.increment!(:downloads_count)
+    
+    redirect_to "/assets/#{@asset.filename}"
+  end
 
   # GET /assets/1
   # GET /assets/1.xml
@@ -89,16 +96,15 @@ class AssetsController < ApplicationController
     end
   end
   
+  def fast_upload
+    @post = Post.find(params[:post_id])
+  end
+  
   def upload
     @asset  = @current_user.assets.create! params[:asset]
     
     if @asset.errors.empty? then
-      @post = @current_user.posts.create(params[:post])
-      
-      if @post.errors.empty? then
-        @asset.update_attributes(:post_id => @post.id, :email => @post.email)
-        Feed.create_asset(@asset)
-      end
+      Feed.create_asset(@asset)
     end
     
     respond_to do |_format|

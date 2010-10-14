@@ -8,6 +8,10 @@ module ApplicationHelper
     end
   end
   
+  def link_to_download_asset(asset)
+    link_to asset.filename, :action => :download, :controller => :assets, :id => asset.id
+  end
+  
   def dotify(string, length)
     if string and string.length > length
       string[0..(length-3)] + "..." 

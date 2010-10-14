@@ -1,0 +1,19 @@
+<tr>
+	<td>
+		from <%= asset_reference.user.login %> : 
+	</td>
+	<td>
+		<% if @current_user.id == asset_reference.user_id then %>
+			<%= link_to_remote 	image_tag("/images/trash.gif"),
+													:url => {:action => :destroy, :controller => :assets, :id => asset_reference.id} %>
+		<% end %>
+		
+		<%= link_to_download_asset(asset_reference) %>
+	</td>
+	<td style='padding-left:10px;padding-right:10px;'>
+		<%= number_to_human_size asset_reference.size %>
+	</td>
+	<td>
+		downloaded <%= asset_reference.downloads_count %> times
+	</td>
+</tr>

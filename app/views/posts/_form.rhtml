@@ -2,34 +2,56 @@
 										:url => {:action => :create},
 										:loading => "new Effect.Appear('post_gif')" do |form| %>
 
-	<h1>Write something</h1>
+	<h1>Posting is so easy</h1>
+	
+	<p class="legend">
+		<i>Once your post will be published, you will also be able to add files to download</i>
+	</p>
 	
 	<table><tbody>
 
 	<tr>
-		<td><%= form.label :title, "Give a title to your post" %></td>
+		<td><%= form.label :title, "Title" %></td>
 		<td><%= form.text_field	:title, :class => :text, :style => "width:500px" %></td>
 	</tr>
 	
 	<%= hidden_field :post, :email, :value => @current_user.email %>
-	
+
 	<tr>
-		<td><%= form.label :content, "And now You say ?" %></td>
+		<td><%= form.label :content, "Development" %></td>
 		<td>
 			<%= form.text_area	:content, :class => :text, :style => "width:500px;height:100px;" %>
 			<p class="note">It is so pleasant when it is written elegantly.</p>
 			<%= hidden_field :post, :user_id, :value => @current_user.id %>
 		</td>
 	</tr>
-	
+
 	<tr>
-		<td></td>
+		<td><span class="note">Options</span></td>
 		<td><label class="no_style">
 			<%= form.check_box :mail_me_comments %> Please send me by email all new comments
 		</label></td>
 	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :display_message %> By default display my title AND my message
+		</label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :display_comments %> Display all comments by default
+		</label></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td><label class="no_style">
+			<%= form.check_box :authorized_comments %> Allow people to comment
+		</label></td>
+	</tr>
 	</tbody></table>
-	
+
 	<br/>
 	
 	<p class="p_for_submit">

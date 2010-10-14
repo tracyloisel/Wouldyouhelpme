@@ -1,0 +1,36 @@
+<div id="form_upload_file" class="standard_form yellowcanvas">
+<% form_for	Asset.new,
+						:url => {:action => :upload, :controller => :assets},
+						:html => { :multipart => true, :target => 'upload_frame'} do |form| %>
+
+<h1>Upload a new file</h1>
+
+<div id="super_box_notification" class="notification" style="display:none;">
+</div>
+
+<%= hidden_field :asset, :user_id, :value => @current_user.id %>
+<%= hidden_field :asset, :email, :value => @current_user.email %>
+<%= hidden_field :asset, :post_id, :value => @post.id %>
+
+<p>
+	<label>
+		<i>Choose your file :</i>
+		<%= form.file_field "uploaded_data"	%>
+	</label>
+</p>
+
+<p class="note"><i>Max size is fixed to 1Go</i></p>
+
+<p class="p_for_submit">
+	<%= submit_tag "Upload my file", :onclick => "new Effect.Appear('upload_gif', {duration: 0.2});" %> or
+	
+	<%= link_to_function "Close this form" do |page|
+				page.visual_effect	:Puff, :super_box, :duration => 0.3
+			end %>
+			
+	<%= image_tag '/images/indicator.gif', :style => "display:none;", :id => "upload_gif" %>
+</p>
+
+<iframe id="upload_frame" name="upload_frame" style="width:0px;height:0px;border:0px;" src="about:blank;"></iframe>
+<% end %>
+</div>

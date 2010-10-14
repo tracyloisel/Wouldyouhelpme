@@ -65,9 +65,9 @@ class Feed < ActiveRecord::Base
       when KIND_DESTROY_COMMENT
         "Hmm, it's embarrassing... <b>#{@comment.user.login} destroyed his comment</b> on the post titled <u>#{@comment.post.title}</u>."
       when KIND_NEW_FILE
-        "Yeah ! <b>One new file to download</b> thanks to #{@asset.user.login} : << #{@asset.post.content} >>"
+        "Yeah ! <b>One new file to download</b> thanks to #{@asset.user.login}, you will find it attached to the post titled <u>#{@asset.post.title}</u>"
       when KIND_DESTROY_FILE
-        "Ouch ! <b>#{@asset.user.login} has destroyed the file</b> #{@asset.gender_subject} uploaded the day #{@asset.created_at.strftime('%d/%m/%Y')} : << #{@asset.post.content} >>"
+        "Ouch ! <b>#{@asset.user.login} has destroyed the file</b> #{@asset.gender_subject} uploaded the day #{@asset.created_at.strftime('%d/%m/%Y')}"
       end
     else
       self.cache_content

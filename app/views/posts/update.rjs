@@ -1,0 +1,10 @@
+page.replace_html "post_title_#{@post.id}", :inline => "<%= @post.title %>"
+page.replace_html "content_#{@post.id}", :inline => "<%= RedCloth.new(@post.content).to_html %>"
+page.replace_html "post_comments_#{@post.id}", :partial => "posts/comments", :locals => {:post => @post}
+
+page.replace_html :super_box_notification, :inline => "Updates sucessfully saved. People will enjoy your updates!"
+page.show :super_box_notification
+if @post.display_message then
+  page.show "content_#{@post.id}"
+end
+page.visual_effect  :Fade, "post_#{@post.id}_gif"

@@ -7,46 +7,55 @@
 						<%= gravatar post.email %>
 					</a>
 					<br/>
-					<span style="font-size:8pt;">
+					<div style="font-size:10pt;padding-top:5px;">
 						<b>
-							<%= link_to_function "Sort post", :style => "background-color:#fffccc;color:orange;padding:3px;cursor:move;"%>
+							<%= image_tag "/images/cursor_move.gif", :style => "height:12px" %> Sort
 						</b>
-					</span>
+					</div>
 				</td>
 				
 				<td>
-					<i style="font-size:8pt;color:#666">
+					<i style="font-size:8pt;color:#999">
 						<%= post.user && post.user.login || post.email %> said <%= distance_of_time_in_words(post.created_at, Time.now)%> at
 						<%= post.created_at.strftime("%Hh:%Mm:%Ss") %> :
 					</i>
-					
+
 					<br/>
-					
-					<b class="post_title" style="font-size:<%= 10 + post.votes_to_fontsize %>pt;">
+
+					<b id="post_title_<%= post.id %>" class="post_title" style="font-size:<%= 12 + post.votes_to_fontsize %>pt;">
 						<%= post.title %>
 					</b>
-					
+
 					<div class="clear"></div>
 					
 						<span style="font-size:8pt;">
-							<%= link_to_function "<b>Read more</b>", :style => "background-color:#EDF3FE;color:blue;padding:3px;" do |page|
+							<%= link_to_function "<b>Display message</b>", :style => "background-color:#EDF3FE;color:blue;padding:3px;" do |page|
 									page.visual_effect	:toggle_slide, "content_#{post.id}", :duration => 0.2
 								end %>
 								
-								<% if @current_user.id == post.user_id and 1 == 2 then %>
-									<%= link_to_remote 	"Edit",
-									 										:url => {:action => :edit, :post => post.id, :controller => :posts},
-																			:loading => "new Effect.Appear('post_#{post.id}_gif')" %>
-								<% end %>
+								&middot;
+
+								<%= link_to_remote 	"Edit",
+								 										:url => {:action => :edit, :post_id => post.id, :controller => :posts},
+																		:loading => "new Effect.Appear('post_#{post.id}_gif')" %>
+																		
+								&middot;
+
+								<%= link_to_remote 	"Send by email to all",
+								 										:url => {:action => :send_by_email, :post_id => post.id, :controller => :posts},
+																		:confirm => "Are you really ready to send it to everybody ?" %>
+								
+								&middot;
 								
 								<span class="archive_link">
-								<%= link_to_remote 	"Archive",
-								 										:url => {:action => :archive, :post => post.id, :controller => :posts},
-																		:loading => "new Effect.Appear('post_#{post.id}_gif')",
-																		:confirm => "Are you sure ? It will be not destroy but hide from this lists." %>
+									<%= link_to_remote 	"Archive",
+									 										:url => {:action => :archive, :post => post.id, :controller => :posts},
+																			:loading => "new Effect.Appear('post_#{post.id}_gif')",
+																			:confirm => "Are you sure ? It will be not destroy but hide from this lists." %>
 								</span>
 								
 								<% if @current_user.id == post.user_id then %>
+									&middot;
 									<span class="delete_link">
 										<%= link_to_remote 	"Delete",
 										 										:url => {:action => :destroy, :post => post.id, :controller => :posts},
@@ -66,64 +75,55 @@
 				</td>
 				
 				<td>
-					<div id="content_<%= post.id %>" style="display:<%= post.title.nil? ? 'on' : 'none' %>;">
+					<div id="content_<%= post.id %>" style="display:<%= post.display_message ? 'on' : 'none' %>;">
 						<%= RedCloth.new(post.content.to_s).to_html %>
 					</div>
 				</td>
 			</tr>
 			
-			<% unless post.assets.size.zero? then %>
 			<tr>
-				<td><b style="color:red;">Files</b></td>
-				<td>
-					<% post.assets.each do |asset| %>
-						<a href="/assets/<%= asset.filename %>"><%= asset.filename %></a>,
-					<% end %>
+				<td style="text-align:center;padding-top:8px;">
+					<b class="">
+						Files
+					</b>
+				</td>
+				
+				<td style="padding-top:8px;">
+					<div id="post_assets_table_<%= post.id %>" style="display:none;">
+						<table class="assets">
+							<tbody id="post_assets_<%= post.id %>">
+								<%= render :partial => "posts/asset_reference", :collection => post.assets %>
+							</tbody>
+						</table>
+					</div>
+					
+					<span id="upload_file_link">
+						<% if post.assets.size > 0 then %>
+							<%= link_to_function "Display all files" do |page|
+										page.visual_effect	:toggle_slide, "post_assets_table_#{post.id}", :duration => 0.3
+									end %>
+						<% end %>
+
+						<%= link_to_remote 	"Upload a new file",
+																:url => {:action => :fast_upload, :controller => :assets, :post_id => post.id} %>
+					</span>
 				</td>
 			</tr>
-			<% end %>
 			
 			<tr>
 				<td style="padding-top:10px;width:60px;">
 					<div class="add_comment">
-						<b><span id="post_comments_count_<%= post.id %>"style="font-size:18pt;"><%= post.comments.count %></span><br/>pulses</i></b>
+						<b>
+							<span id="post_comments_count_<%= post.id %>"style="font-size:18pt;">
+								<%= post.comments.count %>
+							</span><br/>pulses</i>
+						</b>
 					</div>
 				</td>
 
 				<td style="padding-top:10px;">
-					<div id="form_comment_<%= post.id%>" class="form_comment_user">
-						<div class="form_comment_user_content">
-							<% remote_form_for 	@current_user.comments.new,
-																	:url => {:action => :create, :controller => :comments},
-																	:loading => "new Effect.Appear('comment_gif_#{post.id}')" do |form| %>
-
-									<%= form.label :content, "Take part to the conversation and pulse this conversation :" %>
-									<%= form.text_area :content, :class => :text, :style => "height:40px;width:525px;" %>
-
-									<%= hidden_field :comment, :post_id, :value => post.id %>
-									<%= hidden_field :comment, :email, :value => @current_user.email %>
-									<br/>
-									
-										<%= submit_tag "Add my opinion now!"%>
-										<%= image_tag '/images/indicator.gif', :id => "comment_gif_#{post.id}", :style => "display:none;"%>
-							<% end%>							
-						</div>
-						
-						<div class="clear"></div>
-					</div>
-					
-					<%= link_to_function 	"Display all comments" do |page|
-																
-								page.select("#post_#{post.id} div.comment_user_content").each do |elt|
-									elt.setStyle(:display => '')
-									elt.morph("font-size:10pt;", :duration => 0.3)
-								end
-						end %>
-						
-					<div class="clear"></div>
-						
-					<div id="post_comments_list_<%= post.id %>">
-						<%= render :partial => "posts/hidden_comment", :collection => post.comments %>
+					<div id="post_comments_<%= post.id %>">
+						<%= render :partial => "posts/comments", :locals => {:post => post} %>
 					</div>
 				</td>
 			</tr>

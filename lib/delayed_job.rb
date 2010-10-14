@@ -24,4 +24,12 @@ module DelayedJob
       Notifier.deliver_new_comment(@comment) if @comment
     end
   end
+
+  class NotifyPost < Struct.new(:post_id)
+    def perform
+      @post = Post.find(post_id)
+      
+      User.all.each { |user| Notifier.deliver_new_post(@post, user) } if @post
+    end
+  end
 end

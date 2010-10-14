@@ -38,7 +38,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:post_id])
+    
+    if request.xhr? then
+      render :action => "edit.rjs"
+    end
   end
 
   # POST /posts
@@ -53,13 +57,12 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-    @post = @current_user.posts.find(params[:id])
+    @post = Post.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes(params[:post]) then
         Feed.update_post(@post)
-        flash[:notice] = 'Post was successfully updated.'
-        format.html { redirect_to(@post) }
+        format.js { render :action => "update.rjs" } if request.xhr?
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -85,6 +88,11 @@ class PostsController < ApplicationController
       @post.move_to_archive
       Feed.archive_post(@post)      
     end
+  end
+  
+  def send_by_email
+    @post = Post.find(params[:post_id])
+    Delayed::Job.enqueue(DelayedJob::NotifyPost.new(@post.id))
   end
   
   def sort_posts

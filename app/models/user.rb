@@ -5,9 +5,11 @@ class User < ActiveRecord::Base
   include Authentication::ByPassword
   include Authentication::ByCookieToken
 
+  has_many  :feeds, :order => "feeds.created_at DESC", :dependent => :destroy
+
   has_many  :posts, :order => "posts.created_at DESC", :dependent => :nullify
   has_many  :comments, :order => "comments.created_at DESC", :dependent => :nullify
-  has_many  :feeds, :order => "feeds.created_at DESC", :dependent => :destroy
+  has_many  :assets, :dependent => :nullify
 
   GENDER_MAN            = -1
   GENDER_WOMEN          = 1 #It has more sens isnt'it ?

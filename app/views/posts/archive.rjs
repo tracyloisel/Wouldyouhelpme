@@ -1,4 +1,5 @@
-page.replace_html :post_nb, :inline => "<%= Post.count %>"
+page.replace_html :post_nb, :inline => "<%= Post.count_active %>"
+page.replace_html :posts_archived, :inline => "and also <%= pluralize(Post.count_archive, 'post') %> archived"
 page.visual_effect  :Fade, "post_#{@post.id}_gif"
 page.visual_effect  :Puff, "post_#{@post.id}"
-page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => true
+page.sortable 'posts_list', :url => {:action => :sort_posts}, :scroll => 'window', :handle => "handle"
