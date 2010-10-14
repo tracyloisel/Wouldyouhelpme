@@ -1,6 +1,6 @@
 <tr>
 	<td>
-		from <%= asset_reference.user.login %> : 
+		from <%= asset_reference.user.login if asset_reference.user %> : 
 	</td>
 	<td>
 		<% if @current_user.id == asset_reference.user_id then %>
